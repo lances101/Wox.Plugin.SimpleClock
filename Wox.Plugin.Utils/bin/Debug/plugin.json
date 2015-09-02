@@ -1,0 +1,12 @@
+﻿{
+  "ID":"D2D2C23B084D411DB66FE0C79D6C2A6G",   //Plugin ID，32 bit UUID
+  "ActionKeyword":"rqw",                     //Plugin default action keyword
+  "Name":"Utils",                              //Plugin name
+  "Description":"Utility plugins",    //Plugin description
+  "Author":"Boromak",                     //Plugin Author
+  "Version":"1.0.0",                         //Plugin version，must be x.x.x format
+  "Language":"csharp",                       //Plugin language，we support csharp,python and executable now
+  "Website":"http://boromak.com/",         //Plugin website or author website
+  "IcoPath": "Images\\utils.png",              //Plugin icon, relative path to the pluign folder
+  "ExecuteFileName":"Wox.Plugin.Utils.dll"   //Execution entry. Dll name for c# plugin, and python file for python plugin
+}

@@ -1,0 +1,26 @@
+C:\Users\Boris\Documents\Wox\Output\Debug\Plugins\Wox.Plugin.Color\Languages\en.xaml
+C:\Users\Boris\Documents\Wox\Output\Debug\Plugins\Wox.Plugin.Color\Images\color.png
+C:\Users\Boris\Documents\Wox\Output\Debug\Plugins\Wox.Plugin.Color\plugin.json
+C:\Users\Boris\Documents\Wox\Output\Debug\Plugins\Wox.Plugin.Color\Languages\zh-cn.xaml
+C:\Users\Boris\Documents\Wox\Output\Debug\Plugins\Wox.Plugin.Color\Languages\zh-tw.xaml
+C:\Users\Boris\Documents\Wox\Output\Debug\Plugins\Wox.Plugin.Color\Wox.Plugin.Color.dll
+C:\Users\Boris\Documents\Wox\Output\Debug\Plugins\Wox.Plugin.Color\Wox.Plugin.Color.pdb
+C:\Users\Boris\Documents\Wox\Plugins\Wox.Plugin.Color\obj\Debug\Wox.Plugin.Color.csprojResolveAssemblyReference.cache
+C:\Users\Boris\Documents\Wox\Plugins\Wox.Plugin.Color\obj\Debug\Wox.Plugin.Color.dll
+C:\Users\Boris\Documents\Wox\Plugins\Wox.Plugin.Color\obj\Debug\Wox.Plugin.Color.pdb
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Output\Debug\Plugins\Wox.Plugin.Color\Languages\en.xaml
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Output\Debug\Plugins\Wox.Plugin.Color\Images\color.png
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Output\Debug\Plugins\Wox.Plugin.Color\plugin.json
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Output\Debug\Plugins\Wox.Plugin.Color\Languages\zh-cn.xaml
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Output\Debug\Plugins\Wox.Plugin.Color\Languages\zh-tw.xaml
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Output\Debug\Plugins\Wox.Plugin.Color\Wox.Plugin.Color.dll
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Output\Debug\Plugins\Wox.Plugin.Color\Wox.Plugin.Color.pdb
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Color\obj\Debug\Wox.Plugin.Color.dll
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Color\obj\Debug\Wox.Plugin.Color.pdb
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utility\Languages\en.xaml
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utility\Images\color.png
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utility\plugin.json
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utility\Languages\zh-cn.xaml
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utility\Languages\zh-tw.xaml
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utility\Wox.Plugin.Color.dll
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utility\Wox.Plugin.Color.pdb

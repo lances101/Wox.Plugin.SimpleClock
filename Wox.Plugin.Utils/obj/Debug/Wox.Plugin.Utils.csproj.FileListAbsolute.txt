@@ -1,0 +1,12 @@
+c:\users\boris\documents\visual studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\bin\Debug\Images\utils.png
+c:\users\boris\documents\visual studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\bin\Debug\Wox.Plugin.Utils.dll
+c:\users\boris\documents\visual studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\bin\Debug\Wox.Plugin.Utils.pdb
+c:\users\boris\documents\visual studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\bin\Debug\Wox.Plugin.dll
+c:\users\boris\documents\visual studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Wox.Plugin.Utils.dll
+c:\users\boris\documents\visual studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Wox.Plugin.Utils.pdb
+c:\users\boris\documents\visual studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\bin\Debug\plugin.json
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Images\utils.png
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\plugin.json
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Wox.Plugin.Utils.dll
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Wox.Plugin.Utils.pdb
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Wox.Plugin.Utils.csprojResolveAssemblyReference.cache
