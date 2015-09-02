@@ -22,7 +22,7 @@ namespace Wox.Plugin.Utils
             {
                 _results.Add(new Result()
                 {
-                    Title = handler.CommandAlias,
+                    Title = handler.CommandTitle,
                     SubTitle = handler.CommandDescription,
                     IcoPath = "Images\\utils.png",
                     Action = e =>

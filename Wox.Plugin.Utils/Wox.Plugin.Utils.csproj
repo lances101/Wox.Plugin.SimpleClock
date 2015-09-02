@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlarmCommandHandler.cs" />
-    <Compile Include="ICommandHandler.cs" />
+    <Compile Include="CommandHandlerBase.cs" />
     <Compile Include="UtilsPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
