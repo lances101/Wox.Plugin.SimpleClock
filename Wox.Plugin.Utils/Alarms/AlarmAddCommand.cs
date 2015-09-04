@@ -63,16 +63,14 @@ namespace Wox.Plugin.Utils.Alarms
 
                     _forcedSubtitle = String.Format("\"{0}\" will fire at {1}", name, time.ToString());
                     _forcedTitle = "Alarm set!";
-                    RequeryCurrentCommand();
-                    
-                    return false;
                 }
                 catch (FormatException e)
                 {
                     _forcedSubtitle = "Time format invalid.";
+                    RequeryWithArguments(args);
                 }
             }
-            RequeryWithArguments(args);
+            RequeryCurrentCommand();
             return false;
         }
 

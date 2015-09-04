@@ -76,7 +76,6 @@ namespace Wox.Plugin.Utils.Alarms
                     AlarmStorage.Instance.SaveAlarms();
                     _forcedTitle = "Alarm edited";
                     _forcedSubtitle = String.Format("\"{0}\" was reset to fire at {1}", name, time.ToString());
-                    RequeryCurrentCommand();
                 }
                 catch (FormatException e)
                 {

@@ -59,12 +59,14 @@ namespace Wox.Plugin.Utils.Alarms
                         Name = name
                     });
                     AlarmStorage.Instance.SaveAlarms();
-                    _context.API.ShowMsg("Timer set", String.Format("\"{0}\" will fire at {1}", name, time.ToString()));
-                    return true;
+                    _forcedTitle = "Timer set!";
+                    _forcedSubtitle = String.Format("\"{0}\" will fire at {1}", name, time.ToString());
                 }
                 catch (FormatException e)
                 {
-                    _forcedSubtitle = "Time format invalid.";
+                    _forcedTitle = "An error has occured";
+                    _forcedSubtitle = e.Message;
+                    RequeryWithArguments(args);
                 }
             }
             RequeryCurrentCommand();
@@ -77,7 +79,7 @@ namespace Wox.Plugin.Utils.Alarms
             var args = query.ActionParameters;
             res.Add(new Result()
             {
-                Title = "You are adding a new timer",
+                Title = String.IsNullOrEmpty(_forcedTitle) ?"You are adding a new timer" : _forcedTitle,
                 SubTitle = String.IsNullOrEmpty(_forcedSubtitle) ? "Waiting for parameter formatted as HH:MM:SS" : _forcedSubtitle,
                 IcoPath = GetIconPath(),
                 Action = e =>
