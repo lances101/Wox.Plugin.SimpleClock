@@ -31,25 +31,63 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net35\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
     <Reference Include="Wox.Plugin, Version=1.2.0.444, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Wox.Plugin.1.2.0.444\lib\net35\Wox.Plugin.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlarmCommandHandler.cs" />
+    <Compile Include="Alarms\AlarmNotificationWindow.cs" />
+    <Compile Include="Alarms\AlarmCommand.cs" />
+    <Compile Include="Alarms\AlarmDeleteCommand.cs" />
+    <Compile Include="Alarms\AlarmStorage.cs" />
+    <Compile Include="Alarms\AlarmListCommand.cs" />
+    <Compile Include="Alarms\AlarmAddCommand.cs" />
+    <Compile Include="Alarms\AlarmEditCommand.cs" />
+    <Compile Include="Alarms\AlarmTimerCommand.cs" />
     <Compile Include="CommandHandlerBase.cs" />
+    <Compile Include="ExternalCommandHandler.cs" />
+    <Compile Include="Alarms\NotifyAlarmUserControl.xaml.cs">
+      <DependentUpon>NotifyAlarmUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UtilsPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Images\alarm-blue.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\alarm-green.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\alarm-list.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\alarm-red.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\stopwatch-green.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\tools.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="plugin.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -58,6 +96,12 @@
     <Content Include="Images\utils.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Alarms\NotifyAlarmUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

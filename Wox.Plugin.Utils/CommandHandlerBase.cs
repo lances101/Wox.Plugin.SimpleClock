@@ -8,9 +8,10 @@ namespace Wox.Plugin.Utils
     public abstract class CommandHandlerBase
     {
         protected PluginInitContext _context;
-        protected List<CommandHandlerBase> _subCommands;
+        protected List<CommandHandlerBase> _subCommands = new List<CommandHandlerBase>();
         protected CommandHandlerBase _parentCommand;
-        protected int _childDepth = 0;
+        protected int _commandDepth = -1;
+        protected string _lastError;
         public CommandHandlerBase(PluginInitContext context, CommandHandlerBase parent)
         {
             _context = context;
@@ -18,58 +19,94 @@ namespace Wox.Plugin.Utils
             var temp = this;
             while(temp != null)
             {
-                temp = parent;
-                _childDepth++;
+                temp = temp._parentCommand;
+                _commandDepth++;
             }
         }
         public abstract string CommandAlias { get; }
         public abstract string CommandTitle { get; }
         public abstract string CommandDescription { get; }
+        protected virtual string CommandIconPath { get; }
+        public virtual string GetIconPath()
+        {
+            var path = "";
+            if (_parentCommand != null)
+                return this._parentCommand.GetIconPath();
+            return _context.CurrentPluginMetadata.IcoPath;
+            
+        }
         public virtual List<Result> Query(Query query)
         {
             var args = query.ActionParameters;
-            List<Result> result = new List<Result>();
+            List<Result> results = new List<Result>();
+            if (args.Count - _commandDepth <= 0)
+            {
+                FillResultsWithSubcommands(args, results);
+            }
+            else
+            {
+                var specificHandler = _subCommands.FirstOrDefault(r => r.CommandAlias == args[_commandDepth].ToLower());
+                if (specificHandler != null)
+                {
+                    results.AddRange(specificHandler.Query(query));
+                }
+                else
+                {
+                    FillResultsWithSubcommands(args, results, args[_commandDepth].ToLower());
+                }
+            }
+            return results;
+        }
+
+        private void FillResultsWithSubcommands(List<string> args, List<Result> results, string filterAlias = "")
+        {
             foreach (var subcommand in _subCommands)
             {
-                string error = "";
-                result.Add(new Result()
+                if (filterAlias != "" && !subcommand.CommandAlias.Contains(filterAlias)) continue;
+
+                results.Add(new Result()
                 {
                     Title = subcommand.CommandTitle,
                     SubTitle = subcommand.CommandDescription,
+                    IcoPath = subcommand.GetIconPath(),
                     Action = e =>
                     {
-                        if (subcommand.IsCommandValid(args, out error))
-                        {
-                            subcommand.ExecuteCommand(args);
-                            return true;
-                        }
-                        else
-                        {
-                            //do something with the error
-                            return false;
-                        }
-
+                        return subcommand.ExecuteCommand(args);
                     }
 
                 });
             }
-
-            if (args.Count > _childDepth)
-            {
-                return result.Where(r => query.ActionParameters[1].StartsWith(r.Title)).ToList();
-            }
-            return result;
         }
-        public abstract bool IsCommandValid(List<string> args, out string error);
-        public virtual void ExecuteCommand(List<string> args)
+
+        
+        public virtual bool ExecuteCommand(List<string> args)
+        {
+            SetQueryToCurrentCommand();
+            return false;
+
+        }
+        protected void RequeryWithArguments(List<string> args)
+        {
+
+            _context.API.ChangeQuery(String.Format("{0} {1} ", _context.CurrentPluginMetadata.ActionKeyword, String.Join(" ", args.ToArray()), true));
+        }
+        protected void SetQueryToCurrentCommand()
+        {
+            _context.API.ChangeQuery(String.Format("{0} {1}", _context.CurrentPluginMetadata.ActionKeyword, GetCommandPath()), true);
+        }
+
+        private string GetCommandPath()
         {
             string path = "";
             var temp = this;
-            while(temp != null)
+            while (temp != null)
             {
-                path.Insert(0, temp.CommandAlias + " ");
+                if(!String.IsNullOrEmpty(temp.CommandAlias))
+                    path = path.Insert(0, temp.CommandAlias + " ");
+                temp = temp._parentCommand;
             }
-            _context.API.ChangeQuery(String.Format("{0} {1} ", _context.CurrentPluginMetadata.ActionKeyword, path));
+
+            return path;
         }
     }
 }

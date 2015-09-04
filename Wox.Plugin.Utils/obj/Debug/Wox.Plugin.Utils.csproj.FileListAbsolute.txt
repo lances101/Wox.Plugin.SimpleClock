@@ -10,3 +10,14 @@ D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\plugin.json
 D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Wox.Plugin.Utils.dll
 D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Wox.Plugin.Utils.pdb
 C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Wox.Plugin.Utils.csprojResolveAssemblyReference.cache
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Images\alarm-blue.png
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Images\alarm-green.png
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Images\alarm-red.png
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Images\stopwatch-green.png
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Images\tools.png
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Images\alarm-list.png
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Wox.Plugin.Utils_MarkupCompile.cache
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Wox.Plugin.Utils_MarkupCompile.lref
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Wox.Plugin.Utils.g.resources
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Alarms\NotifyAlarmUserControl.g.cs
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Alarms\NotifyAlarmUserControl.baml
