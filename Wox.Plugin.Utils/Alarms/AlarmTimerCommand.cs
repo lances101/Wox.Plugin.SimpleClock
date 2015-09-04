@@ -64,10 +64,10 @@ namespace Wox.Plugin.Utils.Alarms
                 }
                 catch (FormatException e)
                 {
-                    _lastError = "Time format invalid.";
+                    _forcedSubtitle = "Time format invalid.";
                 }
             }
-            SetQueryToCurrentCommand();
+            RequeryCurrentCommand();
             return false;
         }
 
@@ -78,7 +78,7 @@ namespace Wox.Plugin.Utils.Alarms
             res.Add(new Result()
             {
                 Title = "You are adding a new timer",
-                SubTitle = String.IsNullOrEmpty(_lastError) ? "Waiting for parameter formatted as HH:MM:SS" : _lastError,
+                SubTitle = String.IsNullOrEmpty(_forcedSubtitle) ? "Waiting for parameter formatted as HH:MM:SS" : _forcedSubtitle,
                 IcoPath = GetIconPath(),
                 Action = e =>
                 {

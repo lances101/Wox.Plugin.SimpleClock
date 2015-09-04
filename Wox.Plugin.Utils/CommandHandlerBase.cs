@@ -11,7 +11,9 @@ namespace Wox.Plugin.Utils
         protected List<CommandHandlerBase> _subCommands = new List<CommandHandlerBase>();
         protected CommandHandlerBase _parentCommand;
         protected int _commandDepth = -1;
-        protected string _lastError;
+        protected string _forcedTitle;
+        protected string _forcedSubtitle;
+        
         public CommandHandlerBase(PluginInitContext context, CommandHandlerBase parent)
         {
             _context = context;
@@ -81,16 +83,15 @@ namespace Wox.Plugin.Utils
         
         public virtual bool ExecuteCommand(List<string> args)
         {
-            SetQueryToCurrentCommand();
+            RequeryCurrentCommand();
             return false;
 
         }
         protected void RequeryWithArguments(List<string> args)
         {
-
             _context.API.ChangeQuery(String.Format("{0} {1} ", _context.CurrentPluginMetadata.ActionKeyword, String.Join(" ", args.ToArray()), true));
         }
-        protected void SetQueryToCurrentCommand()
+        public void RequeryCurrentCommand()
         {
             _context.API.ChangeQuery(String.Format("{0} {1}", _context.CurrentPluginMetadata.ActionKeyword, GetCommandPath()), true);
         }

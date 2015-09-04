@@ -39,6 +39,8 @@ namespace Wox.Plugin.Utils.Alarms
 
         public override bool ExecuteCommand(List<string> args)
         {
+            _forcedTitle = "";
+            _forcedSubtitle = "";
             if (args.Count > _commandDepth)
             {
                 try
@@ -47,23 +49,21 @@ namespace Wox.Plugin.Utils.Alarms
                     var alarm = AlarmStorage.Instance.Alarms.FirstOrDefault(a => a.Id == id);
                     if (alarm == null)
                     {
-                        _lastError = String.Format("Alarm with id {0} was not found", id);
-                        RequeryWithArguments(args);
-                        return false;
+                        throw new FormatException(String.Format("Alarm with id {0} was not found", id));
                     }
                     AlarmStorage.Instance.Alarms.RemoveAll(r => r.Id == id);
                     AlarmStorage.Instance.SaveAlarms();
-                    _context.API.ShowMsg("Alarm deleted", String.Format("\"{0}\" was deleted", id));
-                    return true;
-
+                    _forcedTitle = "Alarm deleted";
+                    _forcedSubtitle = String.Format("\"{0}\" was deleted", id);
                 }
                 catch (FormatException e)
                 {
-                    _lastError = "Provided date is invalid";
+                    _forcedTitle = "Error when deleting";
+                    _forcedSubtitle = e.Message;
                     RequeryWithArguments(args);
                 }
             }
-            SetQueryToCurrentCommand();
+            RequeryCurrentCommand();
             return false;
         }
 
@@ -82,13 +82,13 @@ namespace Wox.Plugin.Utils.Alarms
             {
                 res.Add(new Result()
                 {
-                    Title = String.IsNullOrEmpty(_lastError) ? "Choose an alarm to edit" : "An error has occured when trying to edit",
-                    SubTitle = String.IsNullOrEmpty(_lastError) ? "" : _lastError,
+                    Title = String.IsNullOrEmpty(_forcedTitle) ? "Choose an alarm to edit" : _forcedTitle,
+                    SubTitle = String.IsNullOrEmpty(_forcedSubtitle) ? "" : _forcedSubtitle,
                     IcoPath = GetIconPath(),
                     Action = e =>
                     {
                         ExecuteCommand(args);
-                        SetQueryToCurrentCommand();
+                        RequeryCurrentCommand();
                         return false;
                     }
                 });
@@ -103,7 +103,7 @@ namespace Wox.Plugin.Utils.Alarms
                         Action = e =>
                         {
                             args.Add(alarm.Id);
-                            RequeryWithArguments(args);
+                            ExecuteCommand(args);
                             return false;
                         }
                     });

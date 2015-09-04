@@ -40,6 +40,8 @@ namespace Wox.Plugin.Utils.Alarms
 
         public override bool ExecuteCommand(List<string> args)
         {
+            _forcedTitle = "";
+            _forcedSubtitle = "";
             if (args.Count > _commandDepth)
             {
                 try
@@ -48,13 +50,13 @@ namespace Wox.Plugin.Utils.Alarms
                     var alarm = AlarmStorage.Instance.Alarms.FirstOrDefault(a => a.Id == id);
                     if (alarm == null)
                     {
-                        _lastError = String.Format("Alarm with id {0} was not found", id);
+                        _forcedSubtitle = String.Format("Alarm with id {0} was not found", id);
                         RequeryWithArguments(args);
                         return false;
                     }
                     if (args.Count <= _commandDepth + 1)
                     {
-                        _lastError = "No date provided";
+                        _forcedSubtitle = "No date provided";
                         RequeryWithArguments(args);
                         return false;
                     }
@@ -72,17 +74,18 @@ namespace Wox.Plugin.Utils.Alarms
                     alarm.Name = name == "Alarm" ? alarm.Name : name;
 
                     AlarmStorage.Instance.SaveAlarms();
-                    _context.API.ShowMsg("Alarm changed", String.Format("\"{0}\" will now fire at {1}", name, time.ToString("dd/MM/yyyy HH:mm")));
-                    return true;
-                    
+                    _forcedTitle = "Alarm edited";
+                    _forcedSubtitle = String.Format("\"{0}\" was reset to fire at {1}", name, time.ToString());
+                    RequeryCurrentCommand();
                 }
                 catch (FormatException e)
                 {
-                    _lastError = "Provided date is invalid";
+                    _forcedTitle = "An error has occured";
+                    _forcedSubtitle = e.Message;
                     RequeryWithArguments(args);
                 }
             }
-            SetQueryToCurrentCommand();
+            RequeryCurrentCommand();
             return false;
         }
 
@@ -102,17 +105,17 @@ namespace Wox.Plugin.Utils.Alarms
             {
                 res.Add(new Result()
                 {
-                    Title = String.IsNullOrEmpty(_lastError) ? "Choose an alarm to edit" : "An error has occured when trying to edit",
-                    SubTitle = String.IsNullOrEmpty(_lastError) ? "" : _lastError,
+                    Title = String.IsNullOrEmpty(_forcedTitle) ? "Choose an alarm to edit" : _forcedTitle,
+                    SubTitle = String.IsNullOrEmpty(_forcedSubtitle) ? "" : _forcedSubtitle,
                     IcoPath = GetIconPath(),
                     Action = e =>
                     {
                         ExecuteCommand(args);
-                        SetQueryToCurrentCommand();
+                        RequeryCurrentCommand();
                         return false;
                     }
                 });
-                foreach (var alarm in AlarmStorage.Instance.Alarms)
+                foreach (var alarm in alarms)
                 {
                     res.Add(new Result()
                     {

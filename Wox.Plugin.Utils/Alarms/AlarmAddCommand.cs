@@ -59,15 +59,20 @@ namespace Wox.Plugin.Utils.Alarms
                         Name = name
                     });
                     AlarmStorage.Instance.SaveAlarms();
-                    _context.API.ShowMsg("Alarm set", String.Format("\"{0}\" will fire at {1}", name, time.ToString()));
-                    return true;
+                    RequeryWithArguments(args);
+
+                    _forcedSubtitle = String.Format("\"{0}\" will fire at {1}", name, time.ToString());
+                    _forcedTitle = "Alarm set!";
+                    RequeryCurrentCommand();
+                    
+                    return false;
                 }
                 catch (FormatException e)
                 {
-                    _lastError = "Time format invalid.";
+                    _forcedSubtitle = "Time format invalid.";
                 }
             }
-            SetQueryToCurrentCommand();
+            RequeryWithArguments(args);
             return false;
         }
 
@@ -77,8 +82,8 @@ namespace Wox.Plugin.Utils.Alarms
             var args = query.ActionParameters;
             res.Add(new Result()
             {
-                Title = "You are adding a new alarm",
-                SubTitle = String.IsNullOrEmpty(_lastError) ? "Accepts: time as HH:MM, name as any string" : _lastError,
+                Title = String.IsNullOrEmpty(_forcedTitle) ? "You are adding a new alarm" : _forcedTitle,
+                SubTitle = String.IsNullOrEmpty(_forcedSubtitle) ? "Accepts: time as HH:MM, name as any string" : _forcedSubtitle,
                 IcoPath = GetIconPath(),
                 Action = e =>
                 {

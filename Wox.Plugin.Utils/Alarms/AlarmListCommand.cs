@@ -39,7 +39,7 @@ namespace Wox.Plugin.Utils.Alarms
 
         public override bool ExecuteCommand(List<string> args)
         {
-            SetQueryToCurrentCommand();
+            RequeryCurrentCommand();
             return false;
         }
        
