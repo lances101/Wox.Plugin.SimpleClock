@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wox.Plugin.Utils.Alarms
+namespace Wox.Plugin.Utils.Commands.Alarms
 {
     public class AlarmAddCommand : CommandHandlerBase
     {
@@ -38,39 +38,38 @@ namespace Wox.Plugin.Utils.Alarms
             return "Images\\alarm-green.png";
         }
 
-        public override bool ExecuteCommand(List<string> args)
+        protected override bool CommandExecution(List<string> args)
         {
-            if (args.Count > _commandDepth)
+            DateTime time;
+            try
             {
-                try
-                {
-                    var time = DateTime.ParseExact(args[_commandDepth], "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
-                    if (time < DateTime.Now) time = time.AddDays(1);
-
-                    var name = "Alarm";
-                    if (args.Count > _commandDepth + 1)
-                    {
-                        name = String.Join(" ", args.Skip(_commandDepth + 1).ToArray());
-                    }
-
-                    AlarmStorage.Instance.Alarms.Add(new AlarmStorage.StoredAlarm(true)
-                    {
-                        AlarmTime = time,
-                        Name = name
-                    });
-                    AlarmStorage.Instance.SaveAlarms();
-                    RequeryWithArguments(args);
-
-                    _forcedSubtitle = String.Format("\"{0}\" will fire at {1}", name, time.ToString());
-                    _forcedTitle = "Alarm set!";
-                }
-                catch (FormatException e)
-                {
-                    _forcedSubtitle = "Time format invalid.";
-                    RequeryWithArguments(args);
-                }
+                time = DateTime.ParseExact(args[_commandDepth], "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
             }
-            RequeryCurrentCommand();
+            catch(FormatException e)
+            {
+                throw new ArgumentException("Date Invalid:" + e.Message);
+            }
+
+
+            if (time < DateTime.Now) time = time.AddDays(1);
+
+            var name = "Alarm";
+            if (args.Count > _commandDepth + 1)
+            {
+                name = String.Join(" ", args.Skip(_commandDepth + 1).ToArray());
+            }
+
+            AlarmStorage.Instance.Alarms.Add(new AlarmStorage.StoredAlarm(true)
+            {
+                AlarmTime = time,
+                Name = name
+            });
+            AlarmStorage.Instance.SaveAlarms();
+            RequeryWithArguments(args);
+
+            _forcedTitle = "Alarm set!";
+            _forcedSubtitle = String.Format("\"{0}\" will fire at {1}", name, time.ToString());
+            
             return false;
         }
 

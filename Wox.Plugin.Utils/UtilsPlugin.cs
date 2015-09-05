@@ -8,7 +8,7 @@ namespace Wox.Plugin.Utils
     public class Main : IPlugin
     {
         private PluginInitContext context;
-        private CommandHandlerBase _initialCommandHandler;
+        private Commands.CommandHandlerBase _initialCommandHandler;
         private List<Result> _results = new List<Result>();
         public void Init(PluginInitContext context)
         {

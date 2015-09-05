@@ -52,17 +52,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alarms\AlarmNotificationWindow.cs" />
-    <Compile Include="Alarms\AlarmCommand.cs" />
-    <Compile Include="Alarms\AlarmDeleteCommand.cs" />
-    <Compile Include="Alarms\AlarmStorage.cs" />
-    <Compile Include="Alarms\AlarmListCommand.cs" />
-    <Compile Include="Alarms\AlarmAddCommand.cs" />
-    <Compile Include="Alarms\AlarmEditCommand.cs" />
-    <Compile Include="Alarms\AlarmTimerCommand.cs" />
-    <Compile Include="CommandHandlerBase.cs" />
+    <Compile Include="Views\AlarmNotificationWindow.cs" />
+    <Compile Include="Commands\AlarmCommand.cs" />
+    <Compile Include="Commands\Alarms\AlarmDeleteCommand.cs" />
+    <Compile Include="Commands\Alarms\AlarmStorage.cs" />
+    <Compile Include="Commands\Alarms\AlarmListCommand.cs" />
+    <Compile Include="Commands\Alarms\AlarmAddCommand.cs" />
+    <Compile Include="Commands\Alarms\AlarmEditCommand.cs" />
+    <Compile Include="Commands\Alarms\AlarmTimerCommand.cs" />
+    <Compile Include="Commands\CommandHandlerBase.cs" />
     <Compile Include="ExternalCommandHandler.cs" />
-    <Compile Include="Alarms\NotifyAlarmUserControl.xaml.cs">
+    <Compile Include="Views\NotifyAlarmUserControl.xaml.cs">
       <DependentUpon>NotifyAlarmUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UtilsPlugin.cs" />
@@ -98,7 +98,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Alarms\NotifyAlarmUserControl.xaml">
+    <Page Include="Views\NotifyAlarmUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

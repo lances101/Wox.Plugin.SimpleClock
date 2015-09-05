@@ -5,7 +5,7 @@ using System.Text;
 using System.Xml.Serialization;
 using System.IO;
 using Newtonsoft.Json;
-namespace Wox.Plugin.Utils.Alarms
+namespace Wox.Plugin.Utils.Commands.Alarms
 {
     public class AlarmStorage
     {

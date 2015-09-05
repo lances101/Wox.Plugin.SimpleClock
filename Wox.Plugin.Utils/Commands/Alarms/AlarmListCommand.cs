@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wox.Plugin.Utils.Alarms
+namespace Wox.Plugin.Utils.Commands.Alarms
 {
     public class AlarmListCommand : CommandHandlerBase
     {
@@ -37,7 +37,7 @@ namespace Wox.Plugin.Utils.Alarms
             return "Images\\alarm-list.png";
         }
 
-        public override bool ExecuteCommand(List<string> args)
+        protected override bool CommandExecution(List<string> args)
         {
             RequeryCurrentCommand();
             return false;

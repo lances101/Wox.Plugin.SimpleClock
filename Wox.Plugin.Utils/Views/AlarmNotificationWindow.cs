@@ -6,7 +6,7 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Forms;
 using Timer = System.Timers.Timer;
-namespace Wox.Plugin.Utils.Alarms
+namespace Wox.Plugin.Views
 {
     class AlarmNotificationWindow : Window
     {
@@ -24,7 +24,6 @@ namespace Wox.Plugin.Utils.Alarms
             this.Top = Screen.PrimaryScreen.WorkingArea.Bottom - this.Height;
             this.KeyDown += AlarmNotificationWindow_KeyDown;
             this.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Transparent);
-            this.AllowsTransparency = true;
             Timer beepTimer = new Timer(1000);
             beepTimer.Elapsed += delegate
              {

@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
-
-namespace Wox.Plugin.Utils.Alarms
+using Wox.Plugin.Views;
+using Wox.Plugin.Utils.Commands.Alarms;
+namespace Wox.Plugin.Utils.Commands
 {
+
     public class AlarmCommand : CommandHandlerBase
     {
         public AlarmCommand(PluginInitContext context, CommandHandlerBase parent): base(context, parent)
@@ -37,9 +38,6 @@ namespace Wox.Plugin.Utils.Alarms
                 window.Focus();
             }));
             AlarmStorage.Instance.SaveAlarms();
-            
-
-            
         }
 
         

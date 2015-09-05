@@ -19,5 +19,5 @@ D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Images\alarm-list.png
 C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Wox.Plugin.Utils_MarkupCompile.cache
 C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Wox.Plugin.Utils_MarkupCompile.lref
 C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Wox.Plugin.Utils.g.resources
-C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Alarms\NotifyAlarmUserControl.g.cs
-C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Alarms\NotifyAlarmUserControl.baml
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Views\NotifyAlarmUserControl.g.cs
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Views\NotifyAlarmUserControl.baml

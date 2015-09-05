@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Wox.Plugin.Utils.Alarms
+namespace Wox.Plugin.Views
 {
     /// <summary>
     /// Interaction logic for NotifyAlarm.xaml

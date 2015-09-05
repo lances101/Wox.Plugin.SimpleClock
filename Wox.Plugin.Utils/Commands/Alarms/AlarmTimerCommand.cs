@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wox.Plugin.Utils.Alarms
+namespace Wox.Plugin.Utils.Commands.Alarms
 {
     public class AlarmTimerCommand : CommandHandlerBase
     {
@@ -38,38 +38,34 @@ namespace Wox.Plugin.Utils.Alarms
             return "Images\\stopwatch-green.png";
         }
 
-        public override bool ExecuteCommand(List<string> args)
+        protected override bool CommandExecution(List<string> args)
         {
-            if (args.Count > _commandDepth)
+            TimeSpan timeSpan;
+            try
             {
-                try
-                {
-                    var timeSpan = TimeSpan.Parse(args[_commandDepth]);
-                    var time = DateTime.Now.Add(timeSpan);
-
-                    var name = "Timer";
-                    if (args.Count > _commandDepth + 1)
-                    {
-                        name = String.Join(" ", args.Skip(_commandDepth + 1).ToArray());
-                    }
-
-                    AlarmStorage.Instance.Alarms.Add(new AlarmStorage.StoredAlarm(true)
-                    {
-                        AlarmTime = time,
-                        Name = name
-                    });
-                    AlarmStorage.Instance.SaveAlarms();
-                    _forcedTitle = "Timer set!";
-                    _forcedSubtitle = String.Format("\"{0}\" will fire at {1}", name, time.ToString());
-                }
-                catch (FormatException e)
-                {
-                    _forcedTitle = "An error has occured";
-                    _forcedSubtitle = e.Message;
-                    RequeryWithArguments(args);
-                }
+                timeSpan = TimeSpan.Parse(args[_commandDepth]);
             }
-            RequeryCurrentCommand();
+            catch(FormatException e)
+            {
+                throw new ArgumentException("Timespan invalid: " + e.Message);
+            }
+            var time = DateTime.Now.Add(timeSpan);
+
+            var name = "Timer";
+            if (args.Count > _commandDepth + 1)
+            {
+                name = String.Join(" ", args.Skip(_commandDepth + 1).ToArray());
+            }
+
+            AlarmStorage.Instance.Alarms.Add(new AlarmStorage.StoredAlarm(true)
+            {
+                AlarmTime = time,
+                Name = name
+            });
+            AlarmStorage.Instance.SaveAlarms();
+            _forcedTitle = "Timer set!";
+            _forcedSubtitle = String.Format("\"{0}\" will fire at {1}", name, time.ToString());
+        
             return false;
         }
 
