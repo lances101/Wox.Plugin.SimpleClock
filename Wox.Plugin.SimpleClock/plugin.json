@@ -1,0 +1,12 @@
+﻿{
+  "ID":"69a0d52f-a28d-487c-9d51-3e191c081667",   //Plugin ID，32 bit UUID
+  "ActionKeyword":"clock",                     //Plugin default action keyword
+  "Name":"Wox.Plugin.SimpleClock",    //Plugin name
+  "Description":"Simple Clock",    //Plugin description
+  "Author":"Boris Makogonyuk",                     //Plugin Author
+  "Version":"1.0.0",                         //Plugin version，must be x.x.x format
+  "Language":"csharp",                       //Plugin language，we support csharp,python and executable now
+  "Website":"http://boromak.com/",         //Plugin website or author website
+  "IcoPath": "Images\\alarm-blue.png",              //Plugin icon, relative path to the pluign folder
+  "ExecuteFileName":"Wox.Plugin.SimpleClock.dll"   //Execution entry. Dll name for c# plugin, and python file for python plugin
+}

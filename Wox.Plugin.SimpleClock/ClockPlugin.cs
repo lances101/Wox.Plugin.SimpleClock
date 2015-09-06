@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows.Controls;
+
+namespace Wox.Plugin.SimpleClock
+{
+    public class ClockPlugin : IPlugin, ISettingProvider
+    {
+        private PluginInitContext context;
+        private Commands.CommandHandlerBase _initialCommandHandler;
+        private List<Result> _results = new List<Result>();
+
+        public Control CreateSettingPanel()
+        {
+            
+            return new Views.SettingsControl(context.CurrentPluginMetadata.PluginDirectory);
+        }
+
+        public void Init(PluginInitContext context)
+        {
+            this.context = context;
+            _initialCommandHandler = new Commands.ClockCommand(context, null);
+            
+
+        }
+        public List<Result> Query(Query query)
+        {
+            return _initialCommandHandler.Query(query);
+        }
+        
+        
+    }
+}

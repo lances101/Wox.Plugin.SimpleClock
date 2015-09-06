@@ -1,0 +1,26 @@
+c:\users\boris\documents\visual studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\bin\Debug\Images\utils.png
+c:\users\boris\documents\visual studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\bin\Debug\Wox.Plugin.Utils.dll
+c:\users\boris\documents\visual studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\bin\Debug\Wox.Plugin.Utils.pdb
+c:\users\boris\documents\visual studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\bin\Debug\Wox.Plugin.dll
+c:\users\boris\documents\visual studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\bin\Debug\plugin.json
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\plugin.json
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Wox.Plugin.Utils.csprojResolveAssemblyReference.cache
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Images\alarm-blue.png
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Images\alarm-green.png
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Images\alarm-red.png
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Images\stopwatch-green.png
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Images\tools.png
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Images\alarm-list.png
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Views\NotifyAlarmUserControl.g.cs
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Views\NotifyAlarmUserControl.baml
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Views\SettingsControl.g.cs
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Views\SettingsControl.baml
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Wox.Plugin.SimpleAlarm_MarkupCompile.cache
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Wox.Plugin.SimpleAlarm_MarkupCompile.lref
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Sounds\beepbeep.mp3
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Sounds\booooop.mp3
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Wox.Plugin.SimpleAlarm.dll
+D:\Program Files\WOX\Plugins\Wox.Plugin.Utils\Wox.Plugin.SimpleAlarm.pdb
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Wox.Plugin.SimpleAlarm.g.resources
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Wox.Plugin.SimpleAlarm.dll
+C:\Users\Boris\Documents\Visual Studio 2015\Projects\Wox.Plugin.Utils\Wox.Plugin.Utils\obj\Debug\Wox.Plugin.SimpleAlarm.pdb
