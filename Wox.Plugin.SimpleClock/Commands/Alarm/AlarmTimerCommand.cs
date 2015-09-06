@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-namespace Wox.Plugin.SimpleClock.Commands
+using Wox.Plugin.Boromak;
+namespace Wox.Plugin.SimpleClock.Commands.Alarm
 {
     public class AlarmTimerCommand : CommandHandlerBase
     {

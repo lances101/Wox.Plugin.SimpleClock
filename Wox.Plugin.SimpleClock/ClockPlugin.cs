@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
-
+using Wox.Plugin.Boromak;
 namespace Wox.Plugin.SimpleClock
 {
     public class ClockPlugin : IPlugin, ISettingProvider
     {
         private PluginInitContext context;
-        private Commands.CommandHandlerBase _initialCommandHandler;
+        private CommandHandlerBase _initialCommandHandler;
         private List<Result> _results = new List<Result>();
 
         public Control CreateSettingPanel()

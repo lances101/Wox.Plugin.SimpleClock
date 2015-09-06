@@ -60,12 +60,12 @@
     <Compile Include="Commands\AlarmStopwatchCommand.cs" />
     <Compile Include="Views\AlarmNotificationWindow.cs" />
     <Compile Include="Commands\AlarmCommand.cs" />
-    <Compile Include="Commands\AlarmDeleteCommand.cs" />
+    <Compile Include="Commands\Alarm\AlarmDeleteCommand.cs" />
     <Compile Include="AlarmSettingsStorage.cs" />
-    <Compile Include="Commands\AlarmListCommand.cs" />
-    <Compile Include="Commands\AlarmSetCommand.cs" />
-    <Compile Include="Commands\AlarmEditCommand.cs" />
-    <Compile Include="Commands\AlarmTimerCommand.cs" />
+    <Compile Include="Commands\Alarm\AlarmListCommand.cs" />
+    <Compile Include="Commands\Alarm\AlarmSetCommand.cs" />
+    <Compile Include="Commands\Alarm\AlarmEditCommand.cs" />
+    <Compile Include="Commands\Alarm\AlarmTimerCommand.cs" />
     <Compile Include="Commands\CommandHandlerBase.cs" />
     <Compile Include="Views\NotifyAlarmUserControl.xaml.cs">
       <DependentUpon>NotifyAlarmUserControl.xaml</DependentUpon>

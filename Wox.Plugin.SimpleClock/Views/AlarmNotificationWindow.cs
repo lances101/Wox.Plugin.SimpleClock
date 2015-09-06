@@ -18,7 +18,6 @@ namespace Wox.Plugin.SimpleClock.Views
             private Thread backThread;
             public AudioPlayer(string file)
             {
-                
                 Open(file);
             }
 
@@ -75,7 +74,7 @@ namespace Wox.Plugin.SimpleClock.Views
         public AlarmNotificationWindow(DateTime time, string name, string trackPath)
         {
 
-            
+            Content = new NotifyAlarmUserControl(time, name);
             this.Topmost = true;
             this.WindowStyle = WindowStyle.None;
             this.ResizeMode = ResizeMode.NoResize;
@@ -91,13 +90,13 @@ namespace Wox.Plugin.SimpleClock.Views
             {
                 player.Stop();
             };
-            Content = new NotifyAlarmUserControl(time, name);
+            
         }
         
 
         private void AlarmNotificationWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (e.Key == System.Windows.Input.Key.Enter)
+            if (e.Key == System.Windows.Input.Key.Enter || e.Key == System.Windows.Input.Key.Escape)
                 Window.GetWindow(this).Close();
         }
     }

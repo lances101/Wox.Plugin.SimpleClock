@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wox.Plugin.SimpleClock.Commands
+namespace Wox.Plugin.Boromak
 {
     /// <summary>
     /// Base class for commands

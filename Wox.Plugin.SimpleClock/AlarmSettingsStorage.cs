@@ -46,6 +46,7 @@ namespace Wox.Plugin.SimpleClock
             File.WriteAllText("Config/clock.json", JsonConvert.SerializeObject(Alarms));
         }
 
+
         public string AlarmTrackPath { get; set; }
         public List<StoredAlarm> Alarms = new List<StoredAlarm>();
         public class StoredAlarm

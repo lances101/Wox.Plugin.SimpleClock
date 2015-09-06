@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Wox.Plugin.Boromak;
 namespace Wox.Plugin.SimpleClock.Commands
 {
     public class ClockCommand : CommandHandlerBase
