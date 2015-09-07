@@ -14,12 +14,27 @@ namespace Wox.Plugin.Boromak
         protected PluginInitContext _context;
         protected List<CommandHandlerBase> _subCommands = new List<CommandHandlerBase>();
         protected CommandHandlerBase _parentCommand;
+
+        //TODO: LOOK INTO Wox 1.3 parameter handling and change the command handling
+        /// <summary>
+        /// Depth is used for getting command specific arguments from the query
+        /// <para/>
+        /// Assuming that our hierarchy is the following: "Clock->Alarm->Set"<para/>
+        /// commandDepth for Set would be 3, which in the following query<para/>
+        /// "clock alarm set 15:00" corresponds to the 4th argument (15:00)
+        /// </summary>
         protected int commandDepth = -1;
         protected string _forcedTitle;
         protected string _forcedSubtitle;
         
-
-        public CommandHandlerBase(PluginInitContext context, CommandHandlerBase parent)
+        
+        /// <summary>
+        /// CommandHandlerBase constructor. 
+        /// Calculates the depth of this command upon creation.
+        /// </summary>
+        /// <param name="context">Wox plugin context</param>
+        /// <param name="parent">parent of type CommandHandlerBase</param>
+        public CommandHandlerBase(PluginInitContext context, CommandHandlerBase parent = null)
         {
             _context = context;
             _parentCommand = parent;
@@ -33,8 +48,7 @@ namespace Wox.Plugin.Boromak
         public abstract string CommandAlias { get; }
         public abstract string CommandTitle { get; }
         public abstract string CommandDescription { get; }
-        public virtual string CommandIconPath { get; }
-
+       
         /// <summary>
         /// Get an icon for this command
         /// If this command does not have one, it will recursively search for it in its parents
