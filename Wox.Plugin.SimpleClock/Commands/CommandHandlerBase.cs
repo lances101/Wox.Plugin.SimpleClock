@@ -7,7 +7,8 @@ namespace Wox.Plugin.Boromak
 {
     /// <summary>
     /// Base class for commands
-    /// Handles queries and command execution if not overriden
+    /// Handles queries and command execution by itself if not overriden
+    /// Designed to be used for complex trees of commands
     /// </summary>
     public abstract class CommandHandlerBase
     {
@@ -62,16 +63,46 @@ namespace Wox.Plugin.Boromak
             return _context.CurrentPluginMetadata.IcoPath;
             
         }
+
+        /// <summary>
+        /// Executes the query for the current command
+        /// Override CommandQuery to change behavior
+        /// </summary>
+        /// <param name="query">query from parent command</param>
+        /// <returns></returns>
+        public List<Result> Query(Query query)
+        {
+            var results = new List<Result>();
+            CommandQuery(query, ref results);
+            _forcedTitle = "";
+            _forcedSubtitle = "";
+            return results;
+        }
+
+        /// <summary>
+        /// Executes before the actual query happens
+        /// </summary>
+        /// <param name="query"></param>
+        protected virtual void PreQuery(Query query) { }
+
+        /// <summary>
+        /// Executes after the query but before the results are returned.
+        /// If not overriden, resets forced titles. 
+        /// </summary>
+        protected virtual void AfterQuery(Query query, ref List<Result> results)
+        {
+            _forcedTitle = "";
+            _forcedSubtitle = "";
+        }
+
         /// <summary>
         /// If not overriden returns all subcommands of current command
         /// and sets result action to call subcommand
         /// </summary>
-        /// <param name="query">query from parent command</param>
-        /// <returns></returns>
-        public virtual List<Result> Query(Query query)
+        protected virtual List<Result> CommandQuery(Query query, ref List<Result> results)
         {
             var args = query.ActionParameters;
-            List<Result> results = new List<Result>();
+       
             if (args.Count - commandDepth <= 0)
             {
                 FillResultsWithSubcommands(args, results);
@@ -110,7 +141,7 @@ namespace Wox.Plugin.Boromak
                     IcoPath = subcommand.GetIconPath(),
                     Action = e =>
                     {
-                        return subcommand.ExecuteCommand(args);
+                        return subcommand.Execute(args);
                     }
 
                 });
@@ -120,12 +151,12 @@ namespace Wox.Plugin.Boromak
         /// <summary>
         /// Does a check so that the current command actually has a parameter for execution
         /// and then executes the CommandExecution function in a try/catch
-        /// If the command threw an exception returns false and sets
-        /// _forcedTitle and _forcedSubtitle properties
+        /// If the command threw an argument exception displays a message through
+        /// _forcedTitle and _forcedSubtitle 
         /// </summary>
         /// <param name="args">list of arguments</param>
         /// <returns></returns>
-        public bool ExecuteCommand(List<string> args)
+        public bool Execute(List<string> args)
         {
             bool shouldHide = false;
             _forcedTitle = "";
@@ -145,6 +176,7 @@ namespace Wox.Plugin.Boromak
                 }
             }
             RequeryCurrentCommand();
+            
             return shouldHide;
         }
 
@@ -172,7 +204,7 @@ namespace Wox.Plugin.Boromak
         /// <summary>
         /// Changes the query to the current referenced command
         /// </summary>
-        public void RequeryCurrentCommand()
+        protected void RequeryCurrentCommand()
         {
             _context.API.ChangeQuery(GetCommandPath(), true);
         }
@@ -183,7 +215,6 @@ namespace Wox.Plugin.Boromak
         /// <returns>path to this command without action keyword</returns>
         private string GetCommandPath()
         {
-            
             string path = String.Empty;
             var temp = this;
             while (temp != null)

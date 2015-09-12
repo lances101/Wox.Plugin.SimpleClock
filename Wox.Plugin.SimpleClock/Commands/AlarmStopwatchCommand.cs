@@ -65,58 +65,57 @@ namespace Wox.Plugin.SimpleClock.Commands
             return false;
         }
 
-        public override List<Result> Query(Query query)
+        protected override List<Result> CommandQuery(Query query, ref List<Result> results)
         {
-            var res = new List<Result>();
             var args = query.ActionParameters;
-            res.Add(new Result()
+            results.Add(new Result()
             {
                 Title = "Stopwatch Stats - " + stopwatch.Elapsed.ToString(),
                 SubTitle = stopwatch.IsRunning? "Running" : "Stopped",
                 IcoPath = GetIconPath(),
                 Action = e =>
                 {
-                    ExecuteCommand(args);
+                    Execute(args);
                     return false;
                 }
             });
 
-            res.Add(new Result()
+            results.Add(new Result()
             {
                 Title = "Start",
                 SubTitle = "Starts the stopwatch",
                 Action = act =>
                 {
                     args.Add("start");
-                    ExecuteCommand(args);
+                    Execute(args);
                     return false;
                 },
             });
 
-            res.Add(new Result()
+            results.Add(new Result()
             {
                 Title = "Stop",
                 SubTitle = "Stops the stopwatch",
                 Action = act =>
                 {
                     args.Add("stop");
-                    ExecuteCommand(args);
+                    Execute(args);
                     return false;
                 },
             });
-            res.Add(new Result()
+            results.Add(new Result()
             {
                 Title = "Restart",
                 SubTitle = "Restarts the stopwatch",
                 Action = act =>
                 {
                     args.Add("restart");
-                    ExecuteCommand(args);
+                    Execute(args);
                     return false;
                 },
             });
 
-            res.Add(new Result()
+            results.Add(new Result()
             {
                 Title = "Reset",
                 SubTitle = "Resets the stopwatch",
@@ -124,11 +123,11 @@ namespace Wox.Plugin.SimpleClock.Commands
                 {
                     args.Add("reset");
                    
-                    ExecuteCommand(args);
+                    Execute(args);
                     return false;
                 },
             });
-            return res;
+            return results;
         }
     }
 }

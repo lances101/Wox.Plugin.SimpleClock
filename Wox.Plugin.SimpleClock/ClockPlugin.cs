@@ -10,11 +10,9 @@ namespace Wox.Plugin.SimpleClock
     {
         private PluginInitContext context;
         private CommandHandlerBase _initialCommandHandler;
-        private List<Result> _results = new List<Result>();
-
+        
         public Control CreateSettingPanel()
         {
-            
             return new Views.SettingsControl(context.CurrentPluginMetadata.PluginDirectory);
         }
 
@@ -22,8 +20,6 @@ namespace Wox.Plugin.SimpleClock
         {
             this.context = context;
             _initialCommandHandler = new Commands.ClockCommand(context, null);
-            
-
         }
         public List<Result> Query(Query query)
         {

@@ -69,22 +69,21 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
             return false;
         }
 
-        public override List<Result> Query(Query query)
+        protected override List<Result> CommandQuery(Query query, ref List<Result> results)
         {
-            var res = new List<Result>();
             var args = query.ActionParameters;
-            res.Add(new Result()
+            results.Add(new Result()
             {
                 Title = String.IsNullOrEmpty(_forcedTitle) ?"You are adding a new timer" : _forcedTitle,
                 SubTitle = String.IsNullOrEmpty(_forcedSubtitle) ? "Waiting for parameter formatted as HH:MM:SS" : _forcedSubtitle,
                 IcoPath = GetIconPath(),
                 Action = e =>
                 {
-                    return ExecuteCommand(args);
+                    return Execute(args);
                 }
             });
-
-            return res;
+        
+            return results;
         }
     }
 }

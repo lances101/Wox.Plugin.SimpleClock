@@ -42,21 +42,20 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
             RequeryCurrentCommand();
             return false;
         }
-       
-        public override List<Result> Query(Query query)
+
+        protected override List<Result> CommandQuery(Query query, ref List<Result> results)
         {
-            var res = new List<Result>();
             var args = query.ActionParameters;
             var alarms = ClockSettingsStorage.Instance.Alarms.Where(r => !r.Fired);
             if (alarms.Count() == 0)
-            res.Add(new Result()
+            results.Add(new Result()
             {
                 Title = "There are no alarms set",
                 IcoPath = GetIconPath(),
             });
             foreach (var alarm in alarms)
             {
-                res.Add(new Result()
+                results.Add(new Result()
                 {
                     Title = alarm.Name,
                     SubTitle = String.Format("Programmed for {0}", alarm.AlarmTime.ToString("dd/MM/yyyy HH:mm")),
@@ -64,7 +63,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
                   
                 });
             }
-            return res;
+            return results;
         }
     }
 }
