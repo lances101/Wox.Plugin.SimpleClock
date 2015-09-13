@@ -29,7 +29,8 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
         {
             get
             {
-                return "Show all programmed alarms";
+                var count = ClockSettingsStorage.Instance.Alarms.Count(r => !r.Fired);
+                return "Show all programmed alarms" + (count > 0? String.Format(" - {0} set", count) : "") ;
             }
         }
         public override string GetIconPath()

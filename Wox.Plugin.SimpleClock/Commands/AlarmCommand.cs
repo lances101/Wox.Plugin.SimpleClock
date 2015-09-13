@@ -38,9 +38,11 @@ namespace Wox.Plugin.SimpleClock.Commands
             if (_alarms == null)
                 _alarms = _storage.Alarms;
             var toFire = _alarms.Where(r => !r.Fired).Where(r => r.AlarmTime < DateTime.Now);
-            if (toFire.Count() == 0) return;
+            
+            if (!toFire.Any()) return;
+
             var alarmToFire = toFire.First();
-            if (alarmToFire == null) return;
+
             alarmToFire.Fired = true;
             System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)(() => {
                 var window = new AlarmNotificationWindow(alarmToFire.AlarmTime, alarmToFire.Name, _storage.AlarmTrackPath);

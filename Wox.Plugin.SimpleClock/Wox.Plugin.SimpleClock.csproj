@@ -66,7 +66,6 @@
     <Compile Include="Commands\Alarm\AlarmSetCommand.cs" />
     <Compile Include="Commands\Alarm\AlarmEditCommand.cs" />
     <Compile Include="Commands\Alarm\AlarmTimerCommand.cs" />
-    <Compile Include="Commands\CommandHandlerBase.cs" />
     <Compile Include="Views\NotifyAlarmUserControl.xaml.cs">
       <DependentUpon>NotifyAlarmUserControl.xaml</DependentUpon>
     </Compile>
@@ -119,8 +118,20 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Wox.Plugin.Boromak\Wox.Plugin.Boromak\Wox.Plugin.Boromak.csproj">
+      <Project>{3acc9978-09a4-4f75-a0e3-593b12c70ae0}</Project>
+      <Name>Wox.Plugin.Boromak</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>taskkill /F /IM Wox.exe
+exit 0</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>start C:\Wox\Wox.exe</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

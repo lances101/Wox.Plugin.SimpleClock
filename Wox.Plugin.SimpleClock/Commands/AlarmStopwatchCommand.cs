@@ -29,7 +29,7 @@ namespace Wox.Plugin.SimpleClock.Commands
         {
             get
             {
-                return "Stopwatch";
+                return "Stopwatch" + (stopwatch.IsRunning? " - Running" : "");
             }
         }
         public override string GetIconPath()

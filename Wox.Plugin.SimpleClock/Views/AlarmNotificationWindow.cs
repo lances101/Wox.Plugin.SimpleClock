@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
+using System.IO;
 using System.Threading;
-using System.Timers;
 using System.Windows;
 using System.Windows.Forms;
-using Timer = System.Timers.Timer;
+using System.Windows.Input;
+using System.Windows.Media;
+using NAudio.Wave;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 namespace Wox.Plugin.SimpleClock.Views
 {
@@ -23,8 +22,8 @@ namespace Wox.Plugin.SimpleClock.Views
 
             public void Open(string file)
             {
-                device = new NAudio.Wave.WaveOut();
-                player = new NAudio.Wave.AudioFileReader(file);
+                _device = new WaveOut();
+                _player = new AudioFileReader(file);
             }
             public void PlayLooped()
             {
@@ -32,19 +31,19 @@ namespace Wox.Plugin.SimpleClock.Views
                 {
                     try
                     {
-                        device.Init(player);
+                        _device.Init(_player);
 
-                        device.PlaybackStopped += (s, e) =>
+                        _device.PlaybackStopped += (s, e) =>
                         {
-                            player.Seek(0, System.IO.SeekOrigin.Begin);
-                            device.Play();
+                            _player.Seek(0, SeekOrigin.Begin);
+                            _device.Play();
                         };
 
-                        device.Play();
+                        _device.Play();
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
-
+                        //ignore errors on thread abort
                     }
                 });
                 backThread.Start();
@@ -53,40 +52,39 @@ namespace Wox.Plugin.SimpleClock.Views
             {
                 
                 backThread.Abort();
-                if (device != null)
-                    device.Stop();
-                if (player != null)
+                if (_device != null)
+                    _device.Stop();
+                if (_player != null)
                 {
-                    player.Dispose();
-                    player = null;
+                    _player.Dispose();
+                    _player = null;
                 }
-                if (device != null)
-                {
-                    device.Dispose();
-                    device = null;
-                }
+                if (_device == null) return;
+
+                _device.Dispose();
+                _device = null;
             }
 
-            NAudio.Wave.WaveOut device;
-            NAudio.Wave.AudioFileReader player;
+            WaveOut _device;
+            AudioFileReader _player;
 
         }
         public AlarmNotificationWindow(DateTime time, string name, string trackPath)
         {
 
             Content = new NotifyAlarmUserControl(time, name);
-            this.Topmost = true;
-            this.WindowStyle = WindowStyle.None;
-            this.ResizeMode = ResizeMode.NoResize;
-            this.Width = 300;
-            this.Height = 150;
-            this.Left = Screen.PrimaryScreen.WorkingArea.Right - this.Width;
-            this.Top = Screen.PrimaryScreen.WorkingArea.Bottom - this.Height;
-            this.KeyDown += AlarmNotificationWindow_KeyDown;
-            this.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Transparent);
+            Topmost = true;
+            WindowStyle = WindowStyle.None;
+            ResizeMode = ResizeMode.NoResize;
+            Width = 300;
+            Height = 150;
+            Left = Screen.PrimaryScreen.WorkingArea.Right - Width;
+            Top = Screen.PrimaryScreen.WorkingArea.Bottom - Height;
+            KeyDown += AlarmNotificationWindow_KeyDown;
+            Background = new SolidColorBrush(Colors.Transparent);
             AudioPlayer player = new AudioPlayer(trackPath);
             player.PlayLooped();
-            this.Closing += delegate
+            Closing += delegate
             {
                 player.Stop();
             };
@@ -94,10 +92,10 @@ namespace Wox.Plugin.SimpleClock.Views
         }
         
 
-        private void AlarmNotificationWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void AlarmNotificationWindow_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == System.Windows.Input.Key.Enter || e.Key == System.Windows.Input.Key.Escape)
-                Window.GetWindow(this).Close();
+            if (e.Key == Key.Enter || e.Key == Key.Escape)
+                GetWindow(this).Close();
         }
     }
 }
