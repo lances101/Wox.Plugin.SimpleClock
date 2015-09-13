@@ -73,7 +73,8 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
             return false;
         }
 
-        protected override List<Result> CommandQuery(Query query, ref List<Result> results)
+        protected override List<Result> CommandQuery(Query query, ref 
+            List<Result> results)
         {
             var args = query.ActionParameters;
             results.Add(new Result()

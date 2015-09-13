@@ -19,7 +19,7 @@ namespace Wox.Plugin.SimpleClock
         public void Init(PluginInitContext context)
         {
             this.context = context;
-            _initialCommandHandler = new Commands.ClockCommand(context, null);
+            _initialCommandHandler = new Commands.AlarmCommand(context, null);
         }
         public List<Result> Query(Query query)
         {

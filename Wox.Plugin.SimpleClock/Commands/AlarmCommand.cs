@@ -19,6 +19,8 @@ namespace Wox.Plugin.SimpleClock.Commands
             _subCommands.Add(new AlarmListCommand(context, this));
             _subCommands.Add(new AlarmEditCommand(context, this));
             _subCommands.Add(new AlarmDeleteCommand(context, this));
+            _subCommands.Add(new AlarmStopwatchCommand(context, this));
+
             _storage = ClockSettingsStorage.Instance;
             if (String.IsNullOrEmpty(_storage.AlarmTrackPath))
             {
