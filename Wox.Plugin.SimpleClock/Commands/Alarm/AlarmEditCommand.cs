@@ -40,13 +40,13 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
 
         protected override bool CommandExecution(List<string> args)
         {
-            var id = args[commandDepth];
+            var id = args[CommandDepth];
             var alarm = ClockSettingsStorage.Instance.Alarms.FirstOrDefault(a => a.Id == id);
             if (alarm == null)
             {
                 throw new ArgumentException(String.Format("Alarm with id {0} was not found", id));                   
             }
-            if (args.Count <= commandDepth + 1)
+            if (args.Count <= CommandDepth + 1)
             {
                 throw new ArgumentException("No date provided");
             }
@@ -54,7 +54,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
             DateTime time;
             try
             {
-                time = DateTime.ParseExact(args[commandDepth + 1], "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                time = DateTime.ParseExact(args[CommandDepth + 1], "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
             }
             catch(FormatException e)
             {
@@ -64,17 +64,17 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
             if (time < DateTime.Now) time = time.AddDays(1);
 
             var name = "Alarm";
-            if (args.Count > commandDepth + 2)
+            if (args.Count > CommandDepth + 2)
             {
-                name = String.Join(" ", args.Skip(commandDepth+2).ToArray());
+                name = String.Join(" ", args.Skip(CommandDepth+2).ToArray());
             }
 
             alarm.AlarmTime = time;
             alarm.Name = name == "Alarm" ? alarm.Name : name;
 
             ClockSettingsStorage.Instance.Save();
-            _forcedTitle = "Alarm edited";
-            _forcedSubtitle = String.Format("\"{0}\" was reset to fire at {1}", name, time.ToString());
+            ForcedTitle = "Alarm edited";
+            ForcedSubtitle = String.Format("\"{0}\" was reset to fire at {1}", name, time.ToString());
             return false;
         }
 
@@ -94,8 +94,8 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
             }
             results.Add(new Result()
             {
-                Title = String.IsNullOrEmpty(_forcedTitle) ? "Choose an alarm to edit" : _forcedTitle,
-                SubTitle = String.IsNullOrEmpty(_forcedSubtitle) ? "" : _forcedSubtitle,
+                Title = String.IsNullOrEmpty(ForcedTitle) ? "Choose an alarm to edit" : ForcedTitle,
+                SubTitle = String.IsNullOrEmpty(ForcedSubtitle) ? "" : ForcedSubtitle,
                 IcoPath = GetIconPath(),
                 Action = e =>
                 {
@@ -113,10 +113,12 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
                     IcoPath = GetIconPath(),
                     Action = e =>
                     {
+                        args.Clear();
+                        
                         args.Add(alarm.Id);
                         args.Add(alarm.AlarmTime.ToString("HH:mm"));
                         args.Add(alarm.Name);
-                        RequeryWithArguments(args);
+                        RequeryCurrentCommand(args);
                         return false;
                     }
                 });

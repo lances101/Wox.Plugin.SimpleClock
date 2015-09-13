@@ -14,12 +14,12 @@ namespace Wox.Plugin.SimpleClock.Commands
         private ClockSettingsStorage _storage;
         public AlarmCommand(PluginInitContext context, CommandHandlerBase parent): base(context, parent)
         {
-            _subCommands.Add(new AlarmSetCommand(context, this));
-            _subCommands.Add(new AlarmTimerCommand(context, this));
-            _subCommands.Add(new AlarmListCommand(context, this));
-            _subCommands.Add(new AlarmEditCommand(context, this));
-            _subCommands.Add(new AlarmDeleteCommand(context, this));
-            _subCommands.Add(new AlarmStopwatchCommand(context, this));
+            SubCommands.Add(new AlarmSetCommand(context, this));
+            SubCommands.Add(new AlarmTimerCommand(context, this));
+            SubCommands.Add(new AlarmListCommand(context, this));
+            SubCommands.Add(new AlarmEditCommand(context, this));
+            SubCommands.Add(new AlarmDeleteCommand(context, this));
+            SubCommands.Add(new AlarmStopwatchCommand(context, this));
 
             _storage = ClockSettingsStorage.Instance;
             if (String.IsNullOrEmpty(_storage.AlarmTrackPath))

@@ -39,7 +39,7 @@ namespace Wox.Plugin.SimpleClock.Commands
 
         protected override bool CommandExecution(List<string> args)
         {
-            switch (args[commandDepth])
+            switch (args[CommandDepth])
             {
                 case "start":
                     stopwatch.Start();
@@ -61,7 +61,7 @@ namespace Wox.Plugin.SimpleClock.Commands
                     RequeryCurrentCommand();
                     return false;
             }
-            RequeryWithArguments(args);
+            RequeryPlugin(args);
             return false;
         }
 

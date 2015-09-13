@@ -39,16 +39,17 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
 
         protected override bool CommandExecution(List<string> args)
         {
-            var id = args[commandDepth];
+            var id = args[CommandDepth];
             var alarm = ClockSettingsStorage.Instance.Alarms.FirstOrDefault(a => a.Id == id);
             if (alarm == null)
             {
                 throw new ArgumentException(String.Format("Alarm with id {0} was not found", id));
             }
+            var name = alarm.Name;
             ClockSettingsStorage.Instance.Alarms.RemoveAll(r => r.Id == id);
             ClockSettingsStorage.Instance.Save();
-            _forcedTitle = "Alarm deleted";
-            _forcedSubtitle = String.Format("\"{0}\" was deleted", id);
+            ForcedTitle = "Alarm deleted";
+            ForcedSubtitle = String.Format("Alarm \"{0}\" with id {1} was deleted", name, id);
             return false;
         }
 
@@ -67,12 +68,11 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
             }
             results.Add(new Result()
             {
-                Title = String.IsNullOrEmpty(_forcedTitle) ? "Choose an alarm to edit" : _forcedTitle,
-                SubTitle = String.IsNullOrEmpty(_forcedSubtitle) ? "" : _forcedSubtitle,
+                Title = String.IsNullOrEmpty(ForcedTitle) ? "Choose an alarm to edit" : ForcedTitle,
+                SubTitle = String.IsNullOrEmpty(ForcedSubtitle) ? "" : ForcedSubtitle,
                 IcoPath = GetIconPath(),
                 Action = e =>
                 {
-                    Execute(args);
                     RequeryCurrentCommand();
                     return false;
                 }
@@ -87,7 +87,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
                     Action = e =>
                     {
                         args.Add(alarm.Id);
-                        Execute(args);
+                        RequeryCurrentCommand(args, true);
                         return false;
                     }
                 });

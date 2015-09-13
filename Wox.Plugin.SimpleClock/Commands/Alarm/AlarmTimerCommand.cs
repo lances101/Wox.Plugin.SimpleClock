@@ -43,7 +43,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
             TimeSpan timeSpan;
             try
             {
-                timeSpan = TimeSpan.Parse(args[commandDepth]);
+                timeSpan = TimeSpan.Parse(args[CommandDepth]);
             }
             catch(FormatException e)
             {
@@ -52,9 +52,9 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
             var time = DateTime.Now.Add(timeSpan);
 
             var name = "Timer";
-            if (args.Count > commandDepth + 1)
+            if (args.Count > CommandDepth + 1)
             {
-                name = String.Join(" ", args.Skip(commandDepth + 1).ToArray());
+                name = String.Join(" ", args.Skip(CommandDepth + 1).ToArray());
             }
 
             ClockSettingsStorage.Instance.Alarms.Add(new ClockSettingsStorage.StoredAlarm(true)
@@ -63,8 +63,8 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
                 Name = name
             });
             ClockSettingsStorage.Instance.Save();
-            _forcedTitle = "Timer set!";
-            _forcedSubtitle = String.Format("\"{0}\" will fire at {1}", name, time.ToString());
+            ForcedTitle = "Timer set!";
+            ForcedSubtitle = String.Format("\"{0}\" will fire at {1}", name, time.ToString());
         
             return false;
         }
@@ -74,8 +74,8 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
             var args = query.ActionParameters;
             results.Add(new Result()
             {
-                Title = String.IsNullOrEmpty(_forcedTitle) ?"You are adding a new timer" : _forcedTitle,
-                SubTitle = String.IsNullOrEmpty(_forcedSubtitle) ? "Waiting for parameter formatted as HH:MM:SS" : _forcedSubtitle,
+                Title = String.IsNullOrEmpty(ForcedTitle) ?"You are adding a new timer" : ForcedTitle,
+                SubTitle = String.IsNullOrEmpty(ForcedSubtitle) ? "Waiting for parameter formatted as HH:MM:SS" : ForcedSubtitle,
                 IcoPath = GetIconPath(),
                 Action = e =>
                 {

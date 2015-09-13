@@ -9,8 +9,8 @@ namespace Wox.Plugin.SimpleClock.Commands
     {
         public ClockCommand(PluginInitContext context, CommandHandlerBase parent) : base(context, parent)
         {
-            _subCommands.Add(new AlarmCommand(context, this));
-            _subCommands.Add(new AlarmStopwatchCommand(context, this));
+            SubCommands.Add(new AlarmCommand(context, this));
+            SubCommands.Add(new AlarmStopwatchCommand(context, this));
         }
 
         public override string CommandAlias

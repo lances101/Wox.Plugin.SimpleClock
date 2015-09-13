@@ -43,7 +43,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
             DateTime time;
             try
             {
-                time = DateTime.ParseExact(args[commandDepth], "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                time = DateTime.ParseExact(args[CommandDepth], "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
             }
             catch(FormatException e)
             {
@@ -54,9 +54,9 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
             if (time < DateTime.Now) time = time.AddDays(1);
 
             var name = "Alarm";
-            if (args.Count > commandDepth + 1)
+            if (args.Count > CommandDepth + 1)
             {
-                name = String.Join(" ", args.Skip(commandDepth + 1).ToArray());
+                name = String.Join(" ", args.Skip(CommandDepth + 1).ToArray());
             }
 
             ClockSettingsStorage.Instance.Alarms.Add(new ClockSettingsStorage.StoredAlarm(true)
@@ -65,10 +65,10 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
                 Name = name
             });
             ClockSettingsStorage.Instance.Save();
-            RequeryWithArguments(args);
+            RequeryPlugin(args);
 
-            _forcedTitle = "Alarm set!";
-            _forcedSubtitle = String.Format("\"{0}\" will fire at {1}", name, time.ToString());
+            ForcedTitle = "Alarm set!";
+            ForcedSubtitle = String.Format("\"{0}\" will fire at {1}", name, time.ToString());
             
             return false;
         }
@@ -79,8 +79,8 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
             var args = query.ActionParameters;
             results.Add(new Result()
             {
-                Title = String.IsNullOrEmpty(_forcedTitle) ? "You are setting a new alarm" : _forcedTitle,
-                SubTitle = String.IsNullOrEmpty(_forcedSubtitle) ? "Accepts: time as HH:MM, name as any string" : _forcedSubtitle,
+                Title = String.IsNullOrEmpty(ForcedTitle) ? "You are setting a new alarm" : ForcedTitle,
+                SubTitle = String.IsNullOrEmpty(ForcedSubtitle) ? "Accepts: time as HH:MM, name as any string" : ForcedSubtitle,
                 IcoPath = GetIconPath(),
                 Action = e =>
                 {
