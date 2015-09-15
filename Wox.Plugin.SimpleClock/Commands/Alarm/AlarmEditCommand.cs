@@ -113,8 +113,9 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
                     IcoPath = GetIconPath(),
                     Action = e =>
                     {
+                        ForcedTitle = "You are editing an alarm with id " + alarm.Id;
+                        ForcedSubtitle = "Submit this command to confirm the edit";
                         args.Clear();
-                        
                         args.Add(alarm.Id);
                         args.Add(alarm.AlarmTime.ToString("HH:mm"));
                         args.Add(alarm.Name);

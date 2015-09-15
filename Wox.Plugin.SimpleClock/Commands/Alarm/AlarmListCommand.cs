@@ -60,7 +60,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
                 {
                     Title = alarm.Name,
                     SubTitle = String.Format("Programmed for {0}", alarm.AlarmTime.ToString("dd/MM/yyyy HH:mm")),
-                    IcoPath = "Images\\alarm-blue.png",
+                    IcoPath = "Images\\alarm_full.png",
                   
                 });
             }
