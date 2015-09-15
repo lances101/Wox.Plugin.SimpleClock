@@ -7,6 +7,6 @@
   "Version":"1.0.0",                         //Plugin version，must be x.x.x format
   "Language":"csharp",                       //Plugin language，we support csharp,python and executable now
   "Website":"http://boromak.com/",         //Plugin website or author website
-  "IcoPath": "Images\\alarm-blue.png",              //Plugin icon, relative path to the pluign folder
+  "IcoPath": "Images\\alarm_full.png",              //Plugin icon, relative path to the pluign folder
   "ExecuteFileName":"Wox.Plugin.SimpleClock.dll"   //Execution entry. Dll name for c# plugin, and python file for python plugin
 }

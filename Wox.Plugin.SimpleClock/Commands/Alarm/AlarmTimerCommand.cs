@@ -35,7 +35,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
 
         public override string GetIconPath()
         {
-            return "Images\\stopwatch-green.png";
+            return "Images\\alarm_timer.png";
         }
 
         protected override bool CommandExecution(List<string> args)

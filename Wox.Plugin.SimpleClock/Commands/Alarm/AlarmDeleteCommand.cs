@@ -34,7 +34,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
         }
         public override string GetIconPath()
         {
-            return "Images\\alarm-red.png";
+            return "Images\\alarm_delete.png";
         }
 
         protected override bool CommandExecution(List<string> args)

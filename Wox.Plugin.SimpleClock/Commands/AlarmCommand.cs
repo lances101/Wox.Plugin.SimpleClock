@@ -76,7 +76,7 @@ namespace Wox.Plugin.SimpleClock.Commands
         
         public override string GetIconPath()
         {
-            return "Images\\alarm-blue.png";
+            return "Images\\alarm_full.png";
         }
       
 
