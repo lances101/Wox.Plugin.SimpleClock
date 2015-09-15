@@ -8,10 +8,11 @@
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="500">
     <Grid>
-        <TextBox x:Name="tbxAudioFilePath" HorizontalAlignment="Stretch" Height="23" Margin="10,30, 85, 0" TextWrapping="Wrap" Text=""   VerticalAlignment="Top" LostFocus="tbxAudioFilePath_LostFocus"/>
+        <TextBox x:Name="tbxAudioFilePath" HorizontalAlignment="Stretch" Height="23" Margin="10,30, 85, 0" Text="" MaxLines="1" TextWrapping="NoWrap"  VerticalAlignment="Top" LostFocus="tbxAudioFilePath_LostFocus"/>
         <Label Content="Alarm Media" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Button x:Name="button" Content="Browse" HorizontalAlignment="Right" Margin="5,30" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-        <Label Content="Alarm can be stopped by hitting ENTER or ESCAPE on the notification window" HorizontalAlignment="Right" Margin="10, 50" VerticalAlignment="Top" Foreground="Gray"/>
+        <Label Content="Alarm can also be stopped by hitting ENTER or ESCAPE on the notification window" HorizontalAlignment="Center" Margin="10, 50" VerticalAlignment="Top" Foreground="Gray"/>
+        <Label Content="Sources: Icons generated on FlatIcons.net | Sounds from OrangeFreeSounds.com" HorizontalAlignment="Right" Margin="10, 10" VerticalAlignment="Bottom" Foreground="Gray"/>
 
     </Grid>
 </UserControl>

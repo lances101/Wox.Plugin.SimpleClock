@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>D:\Program Files\WOX\Plugins\Wox.Plugin.SimpleClock\</OutputPath>
+    <OutputPath>D:\Program Files\WOX\Plugins\Wox.Plugin.SimpleClock-69a0d52f-a28d-487c-9d51-3e191c081627\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>

@@ -78,8 +78,8 @@ namespace Wox.Plugin.SimpleClock.Views
             ResizeMode = ResizeMode.NoResize;
             Width = 300;
             Height = 150;
-            Left = Screen.PrimaryScreen.WorkingArea.Right - Width;
-            Top = Screen.PrimaryScreen.WorkingArea.Bottom - Height;
+            Left = Screen.PrimaryScreen.WorkingArea.Right - Width - 10;
+            Top = Screen.PrimaryScreen.WorkingArea.Bottom - Height - 10;
             KeyDown += AlarmNotificationWindow_KeyDown;
             Background = new SolidColorBrush(Colors.Transparent);
             AudioPlayer player = new AudioPlayer(trackPath);

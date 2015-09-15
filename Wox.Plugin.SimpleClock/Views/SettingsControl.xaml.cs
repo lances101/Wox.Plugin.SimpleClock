@@ -61,7 +61,7 @@ namespace Wox.Plugin.SimpleClock.Views
         {
             System.Windows.Forms.OpenFileDialog ofd = new System.Windows.Forms.OpenFileDialog();
             ofd.FileName = "Audio track";
-            ofd.InitialDirectory = System.IO.Directory.GetCurrentDirectory();
+            ofd.InitialDirectory = pluginDirectory;
             ofd.Filter = "Audio Files (mp3/wav)|*.mp3;*.wav|All Files|*.*";
             ofd.CheckPathExists = true;
             var res = ofd.ShowDialog();
