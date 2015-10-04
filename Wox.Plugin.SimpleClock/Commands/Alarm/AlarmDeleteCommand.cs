@@ -61,8 +61,10 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
             {
                 results.Add(new Result()
                 {
-                    Title = "There are no alarms set",
+                    Title = String.IsNullOrEmpty(ForcedTitle) ? "There are no alarms set" : ForcedTitle,
+                    SubTitle = String.IsNullOrEmpty(ForcedSubtitle) ? "" : ForcedSubtitle,
                     IcoPath = GetIconPath(),
+                    Score = int.MaxValue
                 });
                 return results;
             }
@@ -87,11 +89,12 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
                     IcoPath = GetIconPath(),
                     Action = e =>
                     {
-                        args.Clear();
                         args.Add(alarm.Id);
-                        RequeryCurrentCommand(args, true);
+                        Execute(args);
                         return false;
-                    }
+                    },
+                    
+                    
                 });
             }
             return results;

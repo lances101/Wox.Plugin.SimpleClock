@@ -5,15 +5,15 @@ using System.Text;
 using Wox.Plugin.Boromak;
 namespace Wox.Plugin.SimpleClock.Commands.Alarm
 {
-    public class AlarmSetCommand : CommandHandlerBase
+    public class AlarmAddCommand : CommandHandlerBase
     {
-        public AlarmSetCommand(PluginInitContext context, CommandHandlerBase parent) : base(context, parent) { }
+        public AlarmAddCommand(PluginInitContext context, CommandHandlerBase parent) : base(context, parent) { }
 
         public override string CommandAlias
         {
             get
             {
-                return "set";
+                return "add";
             }
         }
 
@@ -21,7 +21,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
         {
             get
             {
-                return "Sets a new alarm";
+                return "Adds a new alarm";
             }
         }
 
@@ -29,7 +29,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
         {
             get
             {
-                return "Set new alarm";
+                return "Add new alarm";
             }
         }
 
@@ -79,7 +79,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
             var args = query.ActionParameters;
             results.Add(new Result()
             {
-                Title = String.IsNullOrEmpty(ForcedTitle) ? "You are setting a new alarm" : ForcedTitle,
+                Title = String.IsNullOrEmpty(ForcedTitle) ? "You are adding a new alarm" : ForcedTitle,
                 SubTitle = String.IsNullOrEmpty(ForcedSubtitle) ? "Accepts: time as HH:MM, name as any string" : ForcedSubtitle,
                 IcoPath = GetIconPath(),
                 Action = e =>

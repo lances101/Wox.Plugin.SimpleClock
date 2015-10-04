@@ -74,16 +74,15 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
 
             ClockSettingsStorage.Instance.Save();
             ForcedTitle = "Alarm edited";
-            ForcedSubtitle = String.Format("\"{0}\" was reset to fire at {1}", name, time.ToString());
+            ForcedSubtitle = String.Format("\"{0}\" was reset to fire at {1}", name, time);
             return false;
         }
 
         protected override List<Result> CommandQuery(Query query, ref List<Result> results)
         {
             var args = query.ActionParameters;
-
             var alarms = ClockSettingsStorage.Instance.Alarms.Where(r => !r.Fired);
-            if (alarms.Count() == 0)
+            if (!alarms.Any())
             {
                 results.Add(new Result()
                 {
@@ -92,11 +91,25 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
                 });
                 return results;
             }
+
+
+            if (query.ActionParameters.Count > CommandDepth)
+            {
+                var id = query.ActionParameters.ElementAtOrDefault(CommandDepth);
+                if (id != null)
+                {
+                    var alarm = alarms.First(o => o.Id == id);
+                    ForcedTitle = "You are editing an alarm with id " + alarm.Id;
+                    ForcedSubtitle = "Submit this command to confirm the edit";
+                }
+            }
+
             results.Add(new Result()
             {
                 Title = String.IsNullOrEmpty(ForcedTitle) ? "Choose an alarm to edit" : ForcedTitle,
                 SubTitle = String.IsNullOrEmpty(ForcedSubtitle) ? "" : ForcedSubtitle,
                 IcoPath = GetIconPath(),
+                Score = int.MaxValue,
                 Action = e =>
                 {
                     Execute(args);

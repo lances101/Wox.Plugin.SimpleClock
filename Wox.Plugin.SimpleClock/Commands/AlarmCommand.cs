@@ -14,7 +14,7 @@ namespace Wox.Plugin.SimpleClock.Commands
         private ClockSettingsStorage _storage;
         public AlarmCommand(PluginInitContext context, CommandHandlerBase parent): base(context, parent)
         {
-            SubCommands.Add(new AlarmSetCommand(context, this));
+            SubCommands.Add(new AlarmAddCommand(context, this));
             SubCommands.Add(new AlarmTimerCommand(context, this));
             SubCommands.Add(new AlarmListCommand(context, this));
             SubCommands.Add(new AlarmEditCommand(context, this));

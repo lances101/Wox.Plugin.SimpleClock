@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>D:\Program Files\WOX\Plugins\Wox.Plugin.SimpleClock-69a0d52f-a28d-487c-9d51-3e191c081627\</OutputPath>
+    <OutputPath>D:\Program Files\WoxBeta\Plugins\Wox.Plugin.SimpleClock-69a0d52f-a28d-487c-9d51-3e191c081627\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -63,7 +63,7 @@
     <Compile Include="Commands\Alarm\AlarmDeleteCommand.cs" />
     <Compile Include="AlarmSettingsStorage.cs" />
     <Compile Include="Commands\Alarm\AlarmListCommand.cs" />
-    <Compile Include="Commands\Alarm\AlarmSetCommand.cs" />
+    <Compile Include="Commands\Alarm\AlarmAddCommand.cs" />
     <Compile Include="Commands\Alarm\AlarmEditCommand.cs" />
     <Compile Include="Commands\Alarm\AlarmTimerCommand.cs" />
     <Compile Include="Views\NotifyAlarmUserControl.xaml.cs">

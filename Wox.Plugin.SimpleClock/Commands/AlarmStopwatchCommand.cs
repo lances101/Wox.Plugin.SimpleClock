@@ -70,9 +70,10 @@ namespace Wox.Plugin.SimpleClock.Commands
             var args = query.ActionParameters;
             results.Add(new Result()
             {
-                Title = "Stopwatch Stats - " + stopwatch.Elapsed.ToString(),
+                Title = "Stopwatch Stats - " + stopwatch.Elapsed,
                 SubTitle = stopwatch.IsRunning? "Running" : "Stopped",
                 IcoPath = GetIconPath(),
+                Score = int.MaxValue,
                 Action = e =>
                 {
                     Execute(args);
