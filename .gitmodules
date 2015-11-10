@@ -1,0 +1,3 @@
+[submodule "Wox.Plugin.Boromak"]
+	path = Wox.Plugin.Boromak
+	url = https://github.com/lances101/Wox.Plugin.Boromak
