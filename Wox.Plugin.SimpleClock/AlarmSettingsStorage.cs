@@ -26,24 +26,36 @@ namespace Wox.Plugin.SimpleClock
                 
             }
         }
+
+        /// <summary>
+        /// Multiple path combine not implemented in .NET 3.5, so this looks dirty
+        /// </summary>
+        private static readonly string configFolderPath =
+            Path.Combine(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Wox"),
+                "Wox.Plugin.SimpleClock");
+
+        private static readonly string configFilePath = Path.Combine(configFolderPath, "alarms.json");
         
         private void Load()
         {
-            if (!Directory.Exists("Config"))
-                Directory.CreateDirectory("Config");
-            if(!File.Exists("Config/clock.json"))
+            
+            if (!Directory.Exists(configFolderPath))
+                Directory.CreateDirectory(configFolderPath);
+            if(!File.Exists(configFilePath))
             {
                 Alarms = new List<StoredAlarm>();
                 return;
             }
-            var json = File.ReadAllText("Config/clock.json");
+            var json = File.ReadAllText(configFilePath);
             Alarms = JsonConvert.DeserializeObject<List<StoredAlarm>>(json)?? new List<StoredAlarm>();
         }
         public void Save()
         {
-            if (!Directory.Exists("Config"))
-                Directory.CreateDirectory("Config");
-            File.WriteAllText("Config/clock.json", JsonConvert.SerializeObject(Alarms));
+            if (!Directory.Exists(configFolderPath))
+                Directory.CreateDirectory(configFolderPath);
+            File.WriteAllText(configFilePath, JsonConvert.SerializeObject(Alarms));
         }
 
 

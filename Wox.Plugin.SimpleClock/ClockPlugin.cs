@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using Wox.Plugin.Boromak;
+using Wox.Plugin.Features;
+
 namespace Wox.Plugin.SimpleClock
 {
-    public class ClockPlugin : IPlugin, ISettingProvider
+    public class ClockPlugin : IPlugin, ISettingProvider, IInstantQuery
     {
         private PluginInitContext context;
         private CommandHandlerBase _initialCommandHandler;
@@ -25,7 +27,11 @@ namespace Wox.Plugin.SimpleClock
         {
             return _initialCommandHandler.Query(query);
         }
-        
-        
+
+
+        public bool IsInstantQuery(string query)
+        {
+            return true;
+        }
     }
 }

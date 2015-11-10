@@ -64,7 +64,6 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
                     Title = String.IsNullOrEmpty(ForcedTitle) ? "There are no alarms set" : ForcedTitle,
                     SubTitle = String.IsNullOrEmpty(ForcedSubtitle) ? "" : ForcedSubtitle,
                     IcoPath = GetIconPath(),
-                    Score = int.MaxValue
                 });
                 return results;
             }
@@ -73,6 +72,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
                 Title = String.IsNullOrEmpty(ForcedTitle) ? "Choose an alarm to edit" : ForcedTitle,
                 SubTitle = String.IsNullOrEmpty(ForcedSubtitle) ? "" : ForcedSubtitle,
                 IcoPath = GetIconPath(),
+                Score = int.MaxValue,
                 Action = e =>
                 {
                     Execute(args);
@@ -91,6 +91,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
                     {
                         args.Add(alarm.Id);
                         Execute(args);
+                        RequeryCurrentCommand(null, true);
                         return false;
                     },
                     

@@ -46,13 +46,10 @@ namespace Wox.Plugin.SimpleClock.Commands
                     break;
                 case "stop":
                     stopwatch.Stop();
-                    break;
-
+                    break;  
                 case "reset":
                     stopwatch.Reset();
                     break;
-
-
                 case "restart":
                     stopwatch.Reset();
                     stopwatch.Start();
@@ -123,7 +120,6 @@ namespace Wox.Plugin.SimpleClock.Commands
                 Action = act =>
                 {
                     args.Add("reset");
-                   
                     Execute(args);
                     return false;
                 },
