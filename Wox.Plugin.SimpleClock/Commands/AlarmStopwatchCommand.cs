@@ -84,8 +84,9 @@ namespace Wox.Plugin.SimpleClock.Commands
                 SubTitle = "Starts the stopwatch",
                 Action = act =>
                 {
-                    args.Add("start");
-                    Execute(args);
+                    var comArgs = new List<string>(args);
+                    comArgs.Add("start");
+                    Execute(comArgs);
                     return false;
                 },
             });
@@ -96,8 +97,9 @@ namespace Wox.Plugin.SimpleClock.Commands
                 SubTitle = "Stops the stopwatch",
                 Action = act =>
                 {
-                    args.Add("stop");
-                    Execute(args);
+                    var comArgs = new List<string>(args);
+                    comArgs.Add("stop");
+                    Execute(comArgs);
                     return false;
                 },
             });
@@ -107,8 +109,9 @@ namespace Wox.Plugin.SimpleClock.Commands
                 SubTitle = "Restarts the stopwatch",
                 Action = act =>
                 {
-                    args.Add("restart");
-                    Execute(args);
+                    var comArgs = new List<string>(args);
+                    comArgs.Add("restart");
+                    Execute(comArgs);
                     return false;
                 },
             });
@@ -119,8 +122,9 @@ namespace Wox.Plugin.SimpleClock.Commands
                 SubTitle = "Resets the stopwatch",
                 Action = act =>
                 {
-                    args.Add("reset");
-                    Execute(args);
+                    var comArgs = new List<string>(args);
+                    comArgs.Add("reset");
+                    Execute(comArgs);
                     return false;
                 },
             });

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Wox.Infrastructure;
 using Wox.Plugin.SimpleClock.Views;
 using Wox.Plugin.Boromak;
 using Wox.Plugin.SimpleClock.Commands.Alarm;
@@ -14,22 +15,26 @@ namespace Wox.Plugin.SimpleClock.Commands
         private ClockSettingsStorage _storage;
         public AlarmCommand(PluginInitContext context, CommandHandlerBase parent): base(context, parent)
         {
+           
             SubCommands.Add(new AlarmAddCommand(context, this));
             SubCommands.Add(new AlarmTimerCommand(context, this));
             SubCommands.Add(new AlarmListCommand(context, this));
             SubCommands.Add(new AlarmEditCommand(context, this));
             SubCommands.Add(new AlarmDeleteCommand(context, this));
             SubCommands.Add(new AlarmStopwatchCommand(context, this));
-
-            _storage = ClockSettingsStorage.Instance;
-            if (String.IsNullOrEmpty(_storage.AlarmTrackPath))
-            {
-                _storage.AlarmTrackPath = System.IO.Path.Combine(context.CurrentPluginMetadata.PluginDirectory, "Sounds\\beepbeep.mp3");
-                _storage.Save();
-            }
+           
+            InitializeStorage(context);
+            
             System.Timers.Timer alarmTimer = new System.Timers.Timer(5000);
             alarmTimer.Elapsed += AlarmTimer_Elapsed;
             alarmTimer.Start();
+            
+        }
+
+        private void InitializeStorage(PluginInitContext context)
+        {
+            _storage = ClockSettingsStorage.Instance;
+            
         }
 
         List<ClockSettingsStorage.StoredAlarm> _alarms;

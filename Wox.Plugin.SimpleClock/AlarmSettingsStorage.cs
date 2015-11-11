@@ -4,63 +4,41 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using System.IO;
+using System.Reflection;
 using Newtonsoft.Json;
+using Wox.Infrastructure.Storage;
+
 namespace Wox.Plugin.SimpleClock
 {
-    /// <summary>
-    /// Used for alarm storage. When the singleton instance is created
-    /// the alarms are loaded from the XML file
-    /// </summary>
-    public class ClockSettingsStorage
+    public class ClockSettingsStorage :JsonStrorage<ClockSettingsStorage>
     {
-        private static ClockSettingsStorage _storage;
-        public static ClockSettingsStorage Instance {
+        protected override string ConfigFolder
+        {
             get
             {
-                if (_storage == null)
-                {
-                    _storage = new ClockSettingsStorage();
-                    _storage.Load();
-                }
-                return _storage;
-                
+                return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); 
             }
         }
 
-        /// <summary>
-        /// Multiple path combine not implemented in .NET 3.5, so this looks dirty
-        /// </summary>
-        private static readonly string configFolderPath =
-            Path.Combine(Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "Wox"),
-                "Wox.Plugin.SimpleClock");
-
-        private static readonly string configFilePath = Path.Combine(configFolderPath, "alarms.json");
-        
-        private void Load()
+        protected override string ConfigName
         {
-            
-            if (!Directory.Exists(configFolderPath))
-                Directory.CreateDirectory(configFolderPath);
-            if(!File.Exists(configFilePath))
+            get { return "alarms"; }
+        }
+
+        protected override void OnAfterLoad(ClockSettingsStorage obj)
+        {
+            if (String.IsNullOrEmpty(obj.AlarmTrackPath))
             {
-                Alarms = new List<StoredAlarm>();
-                return;
+                obj.AlarmTrackPath = System.IO.Path.Combine(ConfigFolder,"Sounds\\beepbeep.mp3");
+                obj.Save();
             }
-            var json = File.ReadAllText(configFilePath);
-            Alarms = JsonConvert.DeserializeObject<List<StoredAlarm>>(json)?? new List<StoredAlarm>();
-        }
-        public void Save()
-        {
-            if (!Directory.Exists(configFolderPath))
-                Directory.CreateDirectory(configFolderPath);
-            File.WriteAllText(configFilePath, JsonConvert.SerializeObject(Alarms));
         }
 
-
+        [JsonProperty]
         public string AlarmTrackPath { get; set; }
+        [JsonProperty]
         public List<StoredAlarm> Alarms = new List<StoredAlarm>();
+
         public class StoredAlarm
         {
             public StoredAlarm(bool isNew = false)
@@ -69,10 +47,15 @@ namespace Wox.Plugin.SimpleClock
                     Id = (ClockSettingsStorage.Instance.Alarms.Count + 1).ToString();
 
             }
+            [JsonProperty]
             public string Id { get; set; }
+            [JsonProperty]
             public DateTime AlarmTime { get; set; }
+            [JsonProperty]
             public string TrackPath { get; set; }
+            [JsonProperty]
             public string Name { get; set; }
+            [JsonProperty]
             public bool Fired { get; set; }
         }   
     }

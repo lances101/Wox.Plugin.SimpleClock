@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Wox.Plugin.Boromak;
@@ -72,15 +73,23 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
             
             return false;
         }
-
+        
         protected override List<Result> CommandQuery(Query query, ref 
             List<Result> results)
         {
             var args = query.ActionParameters;
+            var parsedTime = new DateTime(); 
+            var dateCorrect = (query.ActionParameters.Count <= CommandDepth) ? false : 
+                DateTime.TryParseExact(args[CommandDepth], "HH:mm", System.Globalization.CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedTime);
+            var nameCorrect = (query.ActionParameters.Count <= CommandDepth + 1)? false : 
+                !String.IsNullOrEmpty(query.ActionParameters[CommandDepth+1]);
             results.Add(new Result()
             {
-                Title = String.IsNullOrEmpty(ForcedTitle) ? "You are adding a new alarm" : ForcedTitle,
-                SubTitle = String.IsNullOrEmpty(ForcedSubtitle) ? "Accepts: time as HH:MM, name as any string" : ForcedSubtitle,
+                Title = !String.IsNullOrEmpty(ForcedTitle) ? ForcedTitle : "You are adding a new alarm" ,
+                SubTitle = !String.IsNullOrEmpty(ForcedSubtitle) ? ForcedSubtitle : 
+                    String.Format("Accepts: {0}, {1}. ",
+                        !dateCorrect? "time as HH:MM" : "parsed time " + parsedTime.ToShortTimeString(),
+                        !nameCorrect? "name as any string" : "parsed name " + String.Join(" ", query.ActionParameters.Skip(2).ToArray())),
                 IcoPath = GetIconPath(),
                 Action = e =>
                 {

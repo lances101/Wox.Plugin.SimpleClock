@@ -89,8 +89,9 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
                     IcoPath = GetIconPath(),
                     Action = e =>
                     {
-                        args.Add(alarm.Id);
-                        Execute(args);
+                        var comArgs = new List<string>(args);
+                        comArgs.Add(alarm.Id);
+                        Execute(comArgs);
                         RequeryCurrentCommand(null, true);
                         return false;
                     },

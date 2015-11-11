@@ -72,17 +72,25 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
         protected override List<Result> CommandQuery(Query query, ref List<Result> results)
         {
             var args = query.ActionParameters;
+            var parsedTime = new TimeSpan();
+            var dateCorrect = (query.ActionParameters.Count <= CommandDepth) ? false :
+                TimeSpan.TryParse(query.ActionParameters[CommandDepth], out parsedTime);
+            var nameCorrect = (query.ActionParameters.Count <= CommandDepth + 1) ? false :
+                !String.IsNullOrEmpty(query.ActionParameters[CommandDepth + 1]);
+
             results.Add(new Result()
             {
-                Title = String.IsNullOrEmpty(ForcedTitle) ?"You are adding a new timer" : ForcedTitle,
-                SubTitle = String.IsNullOrEmpty(ForcedSubtitle) ? "Waiting for parameter formatted as HH:MM:SS" : ForcedSubtitle,
+                Title = !String.IsNullOrEmpty(ForcedTitle) ? ForcedTitle : "You are adding a new timer",
+                SubTitle = !String.IsNullOrEmpty(ForcedSubtitle) ? ForcedSubtitle :
+                    String.Format("Accepts: {0}, {1}. ",
+                        !dateCorrect ? "time as HH:MM:SS" : "parsed time " + String.Format("{0} hours {1} minutes {2} seconds", parsedTime.Hours, parsedTime.Minutes, parsedTime.Seconds),
+                        !nameCorrect ? "name as any string" : "parsed name " + String.Join(" ", query.ActionParameters.Skip(2).ToArray())),
                 IcoPath = GetIconPath(),
                 Action = e =>
                 {
                     return Execute(args);
                 }
             });
-        
             return results;
         }
     }
