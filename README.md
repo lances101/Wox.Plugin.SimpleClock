@@ -1,7 +1,7 @@
 # Wox.Plugin.SimpleClock
 A simple clock plugin for [Wox](https://www.getwox.com/)
 
-![Simple Clock](http://i.imgur.com/K7BgfQ2.gif)
+![Simple Clock](http://i.imgur.com/RhyM9rP.gif)
 
 Uses NAudio to play audio files.
 
