@@ -12,17 +12,12 @@ namespace Wox.Plugin.SimpleClock
 {
     public class ClockSettingsStorage :JsonStrorage<ClockSettingsStorage>
     {
-        protected override string ConfigFolder
+        protected string ConfigFolder
         {
             get
             {
                 return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); 
             }
-        }
-
-        protected override string ConfigName
-        {
-            get { return "alarms"; }
         }
 
         protected override void OnAfterLoad(ClockSettingsStorage obj)
@@ -36,6 +31,9 @@ namespace Wox.Plugin.SimpleClock
 
         [JsonProperty]
         public string AlarmTrackPath { get; set; }
+
+        protected override string FileName { get; } = "alarms";
+
         [JsonProperty]
         public List<StoredAlarm> Alarms = new List<StoredAlarm>();
 
