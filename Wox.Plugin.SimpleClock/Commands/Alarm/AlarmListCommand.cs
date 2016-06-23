@@ -29,7 +29,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
         {
             get
             {
-                var count = ClockSettingsStorage.Instance.Alarms.Count(r => !r.Fired);
+                var count = ClockSettingsWrapper.Settings.Alarms.Count(r => !r.Fired);
                 return "Show all programmed alarms" + (count > 0? String.Format(" - {0} set", count) : "") ;
             }
         }
@@ -47,7 +47,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
         protected override List<Result> CommandQuery(Query query, ref List<Result> results)
         {
             var args = query.ActionParameters;
-            var alarms = ClockSettingsStorage.Instance.Alarms.Where(r => !r.Fired);
+            var alarms = ClockSettingsWrapper.Settings.Alarms.Where(r => !r.Fired);
             if (alarms.Count() == 0)
             results.Add(new Result()
             {

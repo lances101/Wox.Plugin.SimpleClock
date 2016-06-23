@@ -12,7 +12,6 @@ namespace Wox.Plugin.SimpleClock.Commands
 
     public class AlarmCommand : CommandHandlerBase
     {
-        private ClockSettingsStorage _storage;
         public AlarmCommand(PluginInitContext context, CommandHandlerBase parent): base(context, parent)
         {
            
@@ -23,7 +22,7 @@ namespace Wox.Plugin.SimpleClock.Commands
             SubCommands.Add(new AlarmDeleteCommand(context, this));
             SubCommands.Add(new AlarmStopwatchCommand(context, this));
            
-            InitializeStorage(context);
+          
             
             System.Timers.Timer alarmTimer = new System.Timers.Timer(5000);
             alarmTimer.Elapsed += AlarmTimer_Elapsed;
@@ -31,17 +30,11 @@ namespace Wox.Plugin.SimpleClock.Commands
             
         }
 
-        private void InitializeStorage(PluginInitContext context)
-        {
-            _storage = ClockSettingsStorage.Instance;
-            
-        }
-
-        List<ClockSettingsStorage.StoredAlarm> _alarms;
+        List<AlarmSettings.StoredAlarm> _alarms;
         private void AlarmTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (_alarms == null)
-                _alarms = _storage.Alarms;
+                _alarms = ClockSettingsWrapper.Settings.Alarms;
             var toFire = _alarms.Where(r => !r.Fired).Where(r => r.AlarmTime < DateTime.Now);
             
             if (!toFire.Any()) return;
@@ -50,11 +43,11 @@ namespace Wox.Plugin.SimpleClock.Commands
 
             alarmToFire.Fired = true;
             System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)(() => {
-                var window = new AlarmNotificationWindow(alarmToFire.AlarmTime, alarmToFire.Name, _storage.AlarmTrackPath);
+                var window = new AlarmNotificationWindow(alarmToFire.AlarmTime, alarmToFire.Name, ClockSettingsWrapper.Settings.AlarmTrackPath);
                 window.Show();
                 window.Focus();
             }));
-            _storage.Save();
+            ClockSettingsWrapper.Storage.Save();
         }
 
         public override string CommandAlias

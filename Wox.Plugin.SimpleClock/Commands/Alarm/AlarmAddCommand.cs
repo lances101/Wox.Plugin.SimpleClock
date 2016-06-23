@@ -60,12 +60,12 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
                 name = String.Join(" ", args.Skip(CommandDepth + 1).ToArray());
             }
 
-            ClockSettingsStorage.Instance.Alarms.Add(new ClockSettingsStorage.StoredAlarm(true)
+            ClockSettingsWrapper.Settings.Alarms.Add(new AlarmSettings.StoredAlarm(true)
             {
                 AlarmTime = time,
                 Name = name
             });
-            ClockSettingsStorage.Instance.Save();
+            ClockSettingsWrapper.Storage.Save();
             RequeryPlugin(args);
 
             ForcedTitle = "Alarm set!";

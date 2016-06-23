@@ -42,7 +42,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
         protected override bool CommandExecution(List<string> args)
         {
             var id = args[CommandDepth];
-            var alarm = ClockSettingsStorage.Instance.Alarms.FirstOrDefault(a => a.Id == id);
+            var alarm = ClockSettingsWrapper.Settings.Alarms.FirstOrDefault(a => a.Id == id);
             if (alarm == null)
             {
                 throw new ArgumentException(String.Format("Alarm with id {0} was not found", id));                   
@@ -73,7 +73,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
             alarm.AlarmTime = time;
             alarm.Name = name == "Alarm" ? alarm.Name : name;
 
-            ClockSettingsStorage.Instance.Save();
+            ClockSettingsWrapper.Storage.Save();
             ForcedTitle = "Alarm edited";
             ForcedSubtitle = String.Format("\"{0}\" was reset to fire at {1}", name, time);
             return false;
@@ -82,7 +82,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
         protected override List<Result> CommandQuery(Query query, ref List<Result> results)
         {
             var args = query.ActionParameters;
-            var alarms = ClockSettingsStorage.Instance.Alarms.Where(r => !r.Fired);
+            var alarms = ClockSettingsWrapper.Settings.Alarms.Where(r => !r.Fired);
             if (!alarms.Any())
             {
                 results.Add(new Result()

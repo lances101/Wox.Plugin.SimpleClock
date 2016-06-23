@@ -55,7 +55,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
     <Reference Include="Wox.Infrastructure">
-      <HintPath>D:\Program Files\WoxCurrent\Wox.Infrastructure.dll</HintPath>
+      <HintPath>..\..\..\..\AppData\Local\Wox\app-1.3.67\Wox.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="Wox.Plugin, Version=1.2.0.486, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Wox.Plugin.1.2.0.486\lib\net35\Wox.Plugin.dll</HintPath>
@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlarmSettings.cs" />
     <Compile Include="Commands\AlarmStopwatchCommand.cs" />
     <Compile Include="Views\AlarmNotificationWindow.cs" />
     <Compile Include="Commands\AlarmCommand.cs" />

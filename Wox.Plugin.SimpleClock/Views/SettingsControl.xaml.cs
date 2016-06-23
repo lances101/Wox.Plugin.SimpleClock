@@ -42,7 +42,7 @@ namespace Wox.Plugin.SimpleClock.Views
         {
             get
             {
-                return ClockSettingsStorage.Instance.AlarmTrackPath;
+                return ClockSettingsWrapper.Settings.AlarmTrackPath;
             }
             set
             {
@@ -52,8 +52,8 @@ namespace Wox.Plugin.SimpleClock.Views
                     tbxAudioFilePath.Text = AlarmTrackProperty;
                     return;
                 }
-                ClockSettingsStorage.Instance.AlarmTrackPath = value;
-                ClockSettingsStorage.Instance.Save();
+                ClockSettingsWrapper.Settings.AlarmTrackPath = value;
+                ClockSettingsWrapper.Storage.Save();
             }
         } 
 

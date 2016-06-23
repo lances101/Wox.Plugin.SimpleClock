@@ -10,51 +10,33 @@ using Wox.Infrastructure.Storage;
 
 namespace Wox.Plugin.SimpleClock
 {
-    public class ClockSettingsStorage :JsonStrorage<ClockSettingsStorage>
+    public class ClockSettingsWrapper
     {
-        protected string ConfigFolder
+        public class ClockSettingsStorage : PluginJsonStorage<AlarmSettings>
+        {
+        };
+        private static AlarmSettings _settings;
+        private static ClockSettingsStorage _storage;
+        public static AlarmSettings Settings
         {
             get
             {
-                return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); 
+                if (_settings == null)                   
+                    _settings = Storage.Load();
+                return _settings;
             }
         }
 
-        protected override void OnAfterLoad(ClockSettingsStorage obj)
+        public static ClockSettingsStorage Storage
         {
-            if (String.IsNullOrEmpty(obj.AlarmTrackPath))
+            get
             {
-                obj.AlarmTrackPath = System.IO.Path.Combine(ConfigFolder,"Sounds\\beepbeep.mp3");
-                obj.Save();
+                if(_storage == null)
+                    _storage = new ClockSettingsStorage();
+                return _storage;
+                
             }
         }
-
-        [JsonProperty]
-        public string AlarmTrackPath { get; set; }
-
-        protected override string FileName { get; } = "alarms";
-
-        [JsonProperty]
-        public List<StoredAlarm> Alarms = new List<StoredAlarm>();
-
-        public class StoredAlarm
-        {
-            public StoredAlarm(bool isNew = false)
-            {
-                if (isNew)
-                    Id = (ClockSettingsStorage.Instance.Alarms.Count + 1).ToString();
-
-            }
-            [JsonProperty]
-            public string Id { get; set; }
-            [JsonProperty]
-            public DateTime AlarmTime { get; set; }
-            [JsonProperty]
-            public string TrackPath { get; set; }
-            [JsonProperty]
-            public string Name { get; set; }
-            [JsonProperty]
-            public bool Fired { get; set; }
-        }   
+       
     }
 }
