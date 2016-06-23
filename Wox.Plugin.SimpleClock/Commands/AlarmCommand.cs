@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Wox.Infrastructure;
 using Wox.Plugin.SimpleClock.Views;
@@ -43,7 +44,7 @@ namespace Wox.Plugin.SimpleClock.Commands
 
             alarmToFire.Fired = true;
 
-            if (String.IsNullOrEmpty(ClockSettingsWrapper.Settings.AlarmTrackPath))
+            if (String.IsNullOrEmpty(ClockSettingsWrapper.Settings.AlarmTrackPath) || !File.Exists(ClockSettingsWrapper.Settings.AlarmTrackPath))
             {
                 ClockSettingsWrapper.Settings.AlarmTrackPath = System.IO.Path.Combine(Context.CurrentPluginMetadata.PluginDirectory, "Sounds\\beepbeep.mp3");
             }
