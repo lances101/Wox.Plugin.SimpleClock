@@ -30,7 +30,7 @@ namespace Wox.Plugin.SimpleClock.Commands
             
         }
 
-        List<AlarmSettings.StoredAlarm> _alarms;
+        List<ClockSettings.StoredAlarm> _alarms;
         private void AlarmTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (_alarms == null)
@@ -42,6 +42,12 @@ namespace Wox.Plugin.SimpleClock.Commands
             var alarmToFire = toFire.First();
 
             alarmToFire.Fired = true;
+
+            if (String.IsNullOrEmpty(ClockSettingsWrapper.Settings.AlarmTrackPath))
+            {
+                ClockSettingsWrapper.Settings.AlarmTrackPath = System.IO.Path.Combine(Context.CurrentPluginMetadata.PluginDirectory, "Sounds\\beepbeep.mp3");
+            }
+
             System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)(() => {
                 var window = new AlarmNotificationWindow(alarmToFire.AlarmTime, alarmToFire.Name, ClockSettingsWrapper.Settings.AlarmTrackPath);
                 window.Show();

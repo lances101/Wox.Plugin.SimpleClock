@@ -57,7 +57,7 @@ namespace Wox.Plugin.SimpleClock.Commands.Alarm
                 name = String.Join(" ", args.Skip(CommandDepth + 1).ToArray());
             }
 
-            ClockSettingsWrapper.Settings.Alarms.Add(new AlarmSettings.StoredAlarm(true)
+            ClockSettingsWrapper.Settings.Alarms.Add(new ClockSettings.StoredAlarm(true)
             {
                 AlarmTime = time,
                 Name = name

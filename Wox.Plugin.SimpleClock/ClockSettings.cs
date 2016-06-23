@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Wox.Plugin.SimpleClock
 {
-    public class AlarmSettings
+    public class ClockSettings
     {
         [JsonProperty]
         public string AlarmTrackPath { get; set; }

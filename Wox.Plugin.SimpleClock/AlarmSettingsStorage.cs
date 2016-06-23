@@ -12,12 +12,9 @@ namespace Wox.Plugin.SimpleClock
 {
     public class ClockSettingsWrapper
     {
-        public class ClockSettingsStorage : PluginJsonStorage<AlarmSettings>
-        {
-        };
-        private static AlarmSettings _settings;
-        private static ClockSettingsStorage _storage;
-        public static AlarmSettings Settings
+        private static ClockSettings _settings;
+        private static PluginJsonStorage<ClockSettings> _storage;
+        public static ClockSettings Settings
         {
             get
             {
@@ -27,12 +24,12 @@ namespace Wox.Plugin.SimpleClock
             }
         }
 
-        public static ClockSettingsStorage Storage
+        public static PluginJsonStorage<ClockSettings> Storage
         {
             get
             {
                 if(_storage == null)
-                    _storage = new ClockSettingsStorage();
+                    _storage = new PluginJsonStorage<ClockSettings>();
                 return _storage;
                 
             }
